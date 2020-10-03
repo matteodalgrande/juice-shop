@@ -113,5 +113,8 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "defaultProject": "frontend",
+  "cli": {
+    "analytics": "637d9b9b-bb00-4ccd-9f93-ac7d9bab1603"
+  }
 }
