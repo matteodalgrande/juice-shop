@@ -17,6 +17,17 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQube Scanner'
+            }
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'cat .scannerwork/report-task.txt > /{JENKINS HOME DIRECTORY}/reports/sonarqube-report'
+                }
+            }
+        }
 
         stage('standard-code and angular-linting'){
                 //Standard fix formatta automaticamente il codice in un formato standard
@@ -58,17 +69,6 @@ pipeline {
         stage ('Start App') {
             steps {
                 sh 'node app"'
-            }
-        }
-        stage ('SonarQube Analysis') {
-            environment {
-                scannerHome = tool 'SonarQube Scanner'
-            }
-            steps {
-                withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > /{JENKINS HOME DIRECTORY}/reports/sonarqube-report'
-                }
             }
         }
         // stage ('NPM Audit Analysis') {
