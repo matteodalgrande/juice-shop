@@ -27,6 +27,11 @@ pipeline {
                 }
             }
         }
+        stage ('NPM Audit Analysis') {
+            steps {
+                sh '/${JENKINS_HOME}/workspace/djuice-shop-pipeline/npm-audit.sh'
+            }
+        }
 
         // stage('standard-code and angular-linting'){
         //         //Standard fix formatta automaticamente il codice in un formato standard
@@ -68,16 +73,6 @@ pipeline {
         // stage ('Start App') {
         //     steps {
         //         sh 'node app"'
-        //     }
-        // }
-
-
-
-
-        // stage ('NPM Audit Analysis') {
-        //     steps {
-        //         sh 'npm i --package-lock-only'
-        //         sh 'npm audit > npm-audit-report'
         //     }
         // }
 
