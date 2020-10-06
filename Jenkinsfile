@@ -12,18 +12,16 @@ pipeline {
 
         stage ('Build') {
             steps {
+                //fa npm install e include anche postinstall che richiama build
                 sh 'npm install'
-                // includo angular
-                sh 'cd frontend && node --max-old-space-size=8192 ./node_modules/@angular/cli/bin/ng build --aot --prod --output-hashing=none --vendor-chunk=true --source-map=false'
             }
         }
 
-        stage('standard and angular-linting'){
+        stage('standard-code and angular-linting'){
                 //Standard fix formatta automaticamente il codice in un formato standard
                 //il linting in angular controlla la qualita' del codice angular nel progetto
                 steps{
-                sh 'standard --fix && cd frontend && ng lint && cd ..'
-                sh ''
+                sh 'npx standard --fix && cd frontend && npx ng lint --format=json > /{JENKINS HOME DIRECTORY}/reports/ng-lint-report && cd ..'
             }
         }
 
@@ -71,11 +69,12 @@ pipeline {
                 }
             }
         }
-        stage ('NPM Audit Analysis') {
-            steps {
-                sh '/{PATH TO SCRIPT}/npm-audit.sh'
-            }
-        }
+        // stage ('NPM Audit Analysis') {
+        //     steps {
+        //         sh 'npm i --package-lock-only'
+        //         sh 'npm audit > npm-audit-report'
+        //     }
+        // }
         stage ('NodeJsScan Analysis') {
             steps {
                 sh 'nodejsscan --directory `pwd` --output /{JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
@@ -89,11 +88,6 @@ pipeline {
         stage ('Dependency-Check Analysis') {
             steps {
                 sh '/{JENKINS HOME DIRECTORY}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out /{JENKINS HOME DIRECTORY}/reports/dependency-check-report --prettyPrint'
-            }
-        }
-        stage ('Audit.js Analysis') {
-            steps {
-                sh '/{PATH TO SCRIPT}/auditjs.sh'
             }
         }
         stage ('Snyk Analysis') {
