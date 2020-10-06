@@ -13,6 +13,7 @@ pipeline {
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
+                sh 'whoami'
                 sh 'npm install'
             }
         }
@@ -21,6 +22,7 @@ pipeline {
                 //Standard fix formatta automaticamente il codice in un formato standard
                 //il linting in angular controlla la qualita' del codice angular nel progetto
                 steps{
+                sh 'whoami'
                 sh 'npx standard --fix && cd frontend && npx ng lint --format=json > /{JENKINS HOME DIRECTORY}/reports/ng-lint-report && cd ..'
             }
         }
