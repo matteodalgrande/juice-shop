@@ -9,13 +9,13 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-        // stage ('Build') {
-        //     steps {
-        //         //fa npm install e include anche postinstall che richiama build
-        //         sh 'whoami'
-        //         sh 'npm install'
-        //     }
-        // }
+        stage ('Build') {
+            steps {
+                //fa npm install e include anche postinstall che richiama build
+                sh 'whoami'
+                sh 'npm install'
+            }
+        }
         stage ('SonarQube Analysis') {
             environment {
                 scannerHome = tool 'SonarQube Scanner'
