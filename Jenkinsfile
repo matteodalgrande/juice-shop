@@ -22,7 +22,6 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv ('SonarQube') {
-                    sh 'cd /${JENKINS_HOME}/workspace/juice-shop-pipeline/'
                     sh '${scannerHome}/bin/sonar-scanner'
                     sh 'cat .scannerwork/report-task.txt > /{JENKINS HOME DIRECTORY}/reports/sonarqube-report'
                 }
