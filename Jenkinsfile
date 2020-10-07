@@ -32,21 +32,25 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
-        // stage ('NodeJsScan Analysis') {
+        stage ('NodeJsScan Analysis') {
+            steps {
+                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report/'
+            }
+        }
+        
+        
+        // stage ('Retire.js Analysis') {
         //     steps {
-        //         sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report/'
+        //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
         //     }
         // }
-        stage ('Retire.js Analysis') {
-            steps {
-                sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-            }
-        }
-        stage ('Dependency-Check Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
-            }
-        }
+        // stage ('Dependency-Check Analysis') {
+        //     steps {
+        //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
+        //     }
+        // }
+
+
         // stage ('Snyk Analysis') {
         //     steps {
         //         sh '/${JENKINS_HOME}/workspace/djuice-shop-pipeline/snyk.sh'
