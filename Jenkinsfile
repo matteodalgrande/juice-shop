@@ -23,7 +23,7 @@ pipeline {
             steps {
                 withSonarQubeEnv ('SonarQube') {
                     sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > /{JENKINS HOME DIRECTORY}/reports/sonarqube-report'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
                 }
             }
         }
@@ -34,17 +34,17 @@ pipeline {
         }
         stage ('NodeJsScan Analysis') {
             steps {
-                sh 'nodejsscan --directory `pwd` --output {JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
+                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
             }
         }
         // stage ('Retire.js Analysis') {
         //     steps {
-        //         sh 'retire --path `pwd` --outputformat json --outputpath /${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+        //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
         //     }
         // }
         // stage ('Dependency-Check Analysis') {
         //     steps {
-        //         sh '/${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out /${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
+        //         sh '/${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
         //     }
         // }
         // stage ('Snyk Analysis') {
