@@ -32,11 +32,11 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
-        // stage ('NodeJsScan Analysis') {
-        //     steps {
-        //         sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report/'
-        //     }
-        // }
+        stage ('NodeJsScan Analysis') {
+            steps {
+                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+            }
+        }
         
         
         stage ('Retire.js Analysis') {
