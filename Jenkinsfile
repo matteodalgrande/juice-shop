@@ -24,7 +24,7 @@ pipeline {
                 withSonarQubeEnv ('SonarQube') {
                     sh '${scannerHome}/bin/sonar-scanner'
                     sh 'mkdir ${JENKINS_HOME}/reports/sonarqube-report'
-                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                    sh 'cat .scannerwork/report-task.json > ${JENKINS_HOME}/reports/sonarqube-report'
                 }
             }
         }
