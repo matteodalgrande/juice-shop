@@ -39,11 +39,11 @@ pipeline {
         }
         
         
-        stage ('Retire.js Analysis') {
-            steps {
-                sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-            }
-        }
+        // stage ('Retire.js Analysis') {
+        //     steps {
+        //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+        //     }
+        // }
         stage ('Dependency-Check Analysis') {
             steps {
                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
