@@ -16,21 +16,19 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage ('SonarQube Analysis') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
-                    // sh 'cat .scannerwork/report-task.txt > /var/lib/jenkins/reports/sonarqube-report'
-                }
-            }
-        }
+        // stage ('SonarQube Analysis') {
+        //     environment {
+        //         scannerHome = tool 'SonarQubeScanner'
+        //     }
+        //     steps {
+        //         withSonarQubeEnv ('SonarQube') {
+        //             sh '${scannerHome}/bin/sonar-scanner'
+        //             // sh 'cat .scannerwork/report-task.txt > /var/lib/jenkins/reports/sonarqube-report'
+        //         }
+        //     }
+        // }
         stage ('NPM Audit Analysis') {
             steps {
-                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
-                sh 'npm i --package-lock-only'
                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
             }
         }
