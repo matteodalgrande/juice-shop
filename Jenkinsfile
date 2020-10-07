@@ -37,24 +37,24 @@ pipeline {
         //     }
         // }
 
-        stage ('NodeJsScan Analysis') {
-            steps {
-                // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
-                // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
-             //   # Use -f to override default Dockerfile
-                sh 'docker build -t nodejsscan-cli -f cli.dockerfile'
-              //  # Mount a volume to the container that points to your source directory and reference it in -f, -d and -o arguments
-                sh 'docker run -v /path-to-source-dir:/src nodejsscan-cli -d /src -o /src/results.json'
-
-            }
-        }
-        
-        
-        // stage ('Retire.js Analysis') {
+        // stage ('NodeJsScan Analysis') {
         //     steps {
-        //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+        //         // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
+        //         // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+        //      //   # Use -f to override default Dockerfile
+        //         sh 'docker build -t nodejsscan-cli -f cli.dockerfile'
+        //       //  # Mount a volume to the container that points to your source directory and reference it in -f, -d and -o arguments
+        //         sh 'docker run -v /path-to-source-dir:/src nodejsscan-cli -d /src -o /src/results.json'
+
         //     }
         // }
+        
+    //ok
+        stage ('Retire.js Analysis') {
+            steps {
+                sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+            }
+        }
         
     //?????????????????????????????????????????????????????????????????????????
         // stage ('Dependency-Check Analysis') {
