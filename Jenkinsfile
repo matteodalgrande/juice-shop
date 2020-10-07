@@ -24,18 +24,18 @@ pipeline {
                 withSonarQubeEnv ('SonarQube') {
                     sh 'cd /${JENKINS_HOME}/workspace/juice-shop-pipeline/'
                     sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > /${JENKINS_HOME}/reports/sonarqube-report'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
                 }
             }
         }
         stage ('NPM Audit Analysis') {
             steps {
-                sh '/${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
             }
         }
         stage ('NodeJsScan Analysis') {
             steps {
-                sh 'nodejsscan --directory `pwd` --output /{JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
+                sh 'nodejsscan --directory `pwd` --output {JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
             }
         }
         // stage ('Retire.js Analysis') {
