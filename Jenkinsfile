@@ -39,8 +39,13 @@ pipeline {
 
         stage ('NodeJsScan Analysis') {
             steps {
-                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
-                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+                // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
+                // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+             //   # Use -f to override default Dockerfile
+                sh 'docker build -t nodejsscan-cli -f cli.dockerfile'
+              //  # Mount a volume to the container that points to your source directory and reference it in -f, -d and -o arguments
+                sh 'docker run -v /path-to-source-dir:/src nodejsscan-cli -d /src -o /src/results.json'
+
             }
         }
         
