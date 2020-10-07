@@ -16,17 +16,17 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage ('SonarQube Analysis') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-                }
-            }
-        }
+        // stage ('SonarQube Analysis') {
+        //     environment {
+        //         scannerHome = tool 'SonarQubeScanner'
+        //     }
+        //     steps {
+        //         withSonarQubeEnv ('SonarQube') {
+        //             sh '${scannerHome}/bin/sonar-scanner'
+        //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+        //         }
+        //     }
+        // }
         stage ('NPM Audit Analysis') {
             steps {
                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
