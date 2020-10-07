@@ -16,37 +16,37 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage ('SonarQube Analysis') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-                }
-            }
-        }
-        stage ('NPM Audit Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-            }
-        }
-        stage ('NodeJsScan Analysis') {
-            steps {
-                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report/'
-            }
-        }
-        // stage ('Retire.js Analysis') {
+        // stage ('SonarQube Analysis') {
+        //     environment {
+        //         scannerHome = tool 'SonarQubeScanner'
+        //     }
         //     steps {
-        //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+        //         withSonarQubeEnv ('SonarQube') {
+        //             sh '${scannerHome}/bin/sonar-scanner'
+        //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+        //         }
         //     }
         // }
-        // stage ('Dependency-Check Analysis') {
+        // stage ('NPM Audit Analysis') {
         //     steps {
-        //         sh '/${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
+        // stage ('NodeJsScan Analysis') {
+        //     steps {
+        //         sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report/'
+        //     }
+        // }
+        stage ('Retire.js Analysis') {
+            steps {
+                sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+            }
+        }
+        stage ('Dependency-Check Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
+            }
+        }
         // stage ('Snyk Analysis') {
         //     steps {
         //         sh '/${JENKINS_HOME}/workspace/djuice-shop-pipeline/snyk.sh'
