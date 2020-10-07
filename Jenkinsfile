@@ -3,12 +3,14 @@ pipeline {
     agent any
     tools {nodejs "nodejs"}
     stages {
-
+    
+    //ok
         stage ('Initialization') {
             steps {
                 sh 'echo "Starting the build"'
             }
         }
+    //ok
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
@@ -16,6 +18,7 @@ pipeline {
                 sh 'npm install'
             }
         }
+    //ok
         // stage ('SonarQube Analysis') {
         //     environment {
         //         scannerHome = tool 'SonarQubeScanner'
@@ -27,16 +30,19 @@ pipeline {
         //         }
         //     }
         // }
+    //ok
         // stage ('NPM Audit Analysis') {
         //     steps {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
-        // stage ('NodeJsScan Analysis') {
-        //     steps {
-        //         sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
-        //     }
-        // }
+
+        stage ('NodeJsScan Analysis') {
+            steps {
+                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
+                sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+            }
+        }
         
         
         // stage ('Retire.js Analysis') {
@@ -44,11 +50,14 @@ pipeline {
         //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
         //     }
         // }
-        stage ('Dependency-Check Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
-            }
-        }
+        
+    //?????????????????????????????????????????????????????????????????????????
+        // stage ('Dependency-Check Analysis') {
+        //     steps {
+        //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
+        //     }
+        // }
+
         // stage ('Audit.js Analysis') {
         //     steps {
         //         sh '${JENKINS_HOME}/auditjs.sh'
