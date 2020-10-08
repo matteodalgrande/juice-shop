@@ -67,7 +67,7 @@ pipeline {
         stage ('Snyk Analysis') {
             steps {
                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
-                sh '${SNYK_AUTH_TOKEN}'
+                sh 'echo ${SNYK_AUTH_TOKEN}'
             }
         }
 
