@@ -31,11 +31,11 @@ pipeline {
         //     }
         // }
     //ok
-        // stage ('NPM Audit Analysis') {
-        //     steps {
-        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-        //     }
-        // }
+        stage ('NPM Audit Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+            }
+        }
     //ok
         // stage ('NodeJsScan Analysis') {
         //     steps {
@@ -43,7 +43,6 @@ pipeline {
         //     }
         // }
         
-    //ok
         stage ('Retire.js Analysis') {
             steps {
                 sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
