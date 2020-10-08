@@ -57,7 +57,7 @@ pipeline {
                 sh 'npm i --package-lock'
                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint --disableAssembly'
                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-report-html --disableAssembly'
-            }
+            }//
         }
 
     // //ok
