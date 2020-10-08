@@ -11,13 +11,13 @@ pipeline {
             }
         }
     // //ok
-    //     stage ('Build') {
-    //         steps {
-    //             //fa npm install e include anche postinstall che richiama build
-    //             sh 'whoami'
-    //             sh 'npm install'
-    //         }
-    //     }
+        stage ('Build') {
+            steps {
+                //fa npm install e include anche postinstall che richiama build
+                sh 'whoami'
+                sh 'npm install'
+            }
+        }
     //ok
         // stage ('SonarQube Analysis') {
         //     environment {
