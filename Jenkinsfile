@@ -10,70 +10,70 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-    //ok
-        stage ('Build') {
-            steps {
-                //fa npm install e include anche postinstall che richiama build
-                sh 'whoami'
-                sh 'npm install'
-            }
-        }
-    // ok
-        stage ('SonarQube Analysis') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
-            steps {
-                withSonarQubeEnv ('SonarQube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-                }
-            }
-        }
-    //ok
-        stage ('NPM Audit Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-            }
-        }
-    //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-        stage ('NodeJsScan Analysis') {
-            steps {
-                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-            }
-        }
-    //ok    prettyPrint json
-        stage ('Retire.js Analysis') {
-            steps {
-                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-            }
-        }
+    // //ok
+    //     stage ('Build') {
+    //         steps {
+    //             //fa npm install e include anche postinstall che richiama build
+    //             sh 'whoami'
+    //             sh 'npm install'
+    //         }
+    //     }
+    // // ok
+    //     stage ('SonarQube Analysis') {
+    //         environment {
+    //             scannerHome = tool 'SonarQubeScanner'
+    //         }
+    //         steps {
+    //             withSonarQubeEnv ('SonarQube') {
+    //                 sh '${scannerHome}/bin/sonar-scanner'
+    //                 sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+    //             }
+    //         }
+    //     }
+    // //ok
+    //     stage ('NPM Audit Analysis') {
+    //         steps {
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+    //         }
+    //     }
+    // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
+    //     stage ('NodeJsScan Analysis') {
+    //         steps {
+    //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+    //         }
+    //     }
+    // //ok    prettyPrint json
+    //     stage ('Retire.js Analysis') {
+    //         steps {
+    //             sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+    //             sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+    //             sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+    //         }
+    //     }
         
     //?????????????????????????????????????????????????????????????????????????
-        // stage ('Dependency-Check Analysis') {
-        //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
-        //     }
-        // }
-
-    //ok
-        stage ('Audit.js Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+        stage ('Dependency-Check Analysis') {
+                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
             }
         }
 
-    //ok
-        stage ('Snyk Analysis') {
-             environment {
-                SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
-            }
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
+    // //ok
+    //     stage ('Audit.js Analysis') {
+    //         steps {
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+    //         }
+    //     }
+
+    // //ok
+    //     stage ('Snyk Analysis') {
+    //          environment {
+    //             SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
+    //         }
+    //         steps {
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
                 
-            }
-        }
+    //         }
+    //     }
 
         // stage('standard-code and angular-linting'){
         //         //Standard fix formatta automaticamente il codice in un formato standard
