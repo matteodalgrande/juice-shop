@@ -4,7 +4,6 @@ pipeline {
     tools {nodejs "nodejs"}
     tools {snyk 'snyk_v2'}
 
-        snykSecurity failOnIssues: false, snykInstallation: 'snyk_v2', snykTokenId: 'ab486ecf-7c34-478e-b567-3826dc975512'
 
     stages {
     
@@ -67,6 +66,7 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
         //     }
         // }
+         snykSecurity failOnIssues: false, snykInstallation: 'snyk_v2', snykTokenId: 'ab486ecf-7c34-478e-b567-3826dc975512'
 
         // stage ('Snyk Analysis') {
         //     steps {
