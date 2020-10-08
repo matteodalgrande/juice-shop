@@ -60,7 +60,7 @@ pipeline {
 
         stage ('Audit.js Analysis') {
             steps {
-                sh 'auditjs ossi'
+                sh 'auditjs ossi --json'
                 // --json > ${JENKINS_HOME}/reports/auditjs-report'
                 // sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
             }
