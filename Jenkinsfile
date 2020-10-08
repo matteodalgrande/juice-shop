@@ -57,12 +57,12 @@ pipeline {
         //     }
         // }
 
-
-        stage ('Audit.js Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-            }
-        }
+    //ok
+        // stage ('Audit.js Analysis') {
+        //     steps {
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+        //     }
+        // }
 
         // stage ('Snyk Analysis') {
         //     steps {
