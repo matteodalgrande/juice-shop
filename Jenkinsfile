@@ -58,11 +58,11 @@ pipeline {
         //     }
         // }
 
-        // stage ('Audit.js Analysis') {
-        //     steps {
-        //         sh '${JENKINS_HOME}/auditjs.sh'
-        //     }
-        // }
+        stage ('Audit.js Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/auditjs.sh'
+            }
+        }
 
         // stage ('Snyk Analysis') {
         //     steps {
