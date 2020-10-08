@@ -172,6 +172,11 @@ pipeline {
         //         sh 'ssh -o StrictHostKeyChecking=no chaos@10.0.2.20 "source ./env.sh && ./env.sh && cd dvna && pm2 start server.js"'
         //     }
         // }
-
     }
+            post{
+                   dir('/var/lib/jenkins/reports/') {
+                    archiveArtifacts artifacts: '**', fingerprint: true
+            }
+        }
+
 }
