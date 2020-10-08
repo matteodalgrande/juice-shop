@@ -2,6 +2,7 @@ pipeline {
 
     agent any
     tools {nodejs "nodejs"}
+    tools {snyk 'snyk_v2'}
     stages {
     
     //ok
@@ -63,8 +64,8 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
         //     }
         // }
-        snykSecurity failOnIssues: false, projectName: 'juice-shop', snykInstallation: 'Please define a Snyk installation in the Jenkins Global Tool Configuration. This task will not run without a Snyk installation.', snykTokenId: '07ba7fd5-cc6e-4586-ba1a-f8777c348b8e'
-        
+       
+        snykSecurity failOnIssues: false, snykInstallation: 'snyk_v2', snykTokenId: 'ab486ecf-7c34-478e-b567-3826dc975512'
         stage ('Snyk Analysis') {
             steps {
                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
