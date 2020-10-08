@@ -37,17 +37,38 @@ pipeline {
         //     }
         // }
 
-        // stage ('NodeJsScan Analysis') {
-        //     steps {
-        //         // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
-        //         // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
-        //      //   # Use -f to override default Dockerfile
-        //         sh 'docker build -t nodejsscan-cli -f cli.dockerfile'
-        //       //  # Mount a volume to the container that points to your source directory and reference it in -f, -d and -o arguments
-        //         sh 'docker run -v /path-to-source-dir:/src nodejsscan-cli -d /src -o /src/results.json'
+        stage ('NodeJsScan Analysis') {
+            steps {
+                // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
+                // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+                sh 'cd ${JENKINS_HOME}'
+                sh 'virtualenv venv -p python3'
+                sh 'source venv/bin/activate'
+                sh 'pip install nodejsscan'
+                sh '${JENKINS_HOME/workspace}'
+                sh 'njscan'
+                sh 'njsscan juice-shop-pipeline/routes/profileImageUrlUpload.js --json -o /var/lib/jenkins/reports/njsscan-report-json'
+//                sh 'njsscan juice-shop-pipeline/ --json -o /var/lib/jenkins/reports/njsscan-report-json'
+                sh '../deactivate'
+            }
+        }
 
-        //     }
-        // }
+// install venv da sudo matteo
+// sudo apt-get install python3-pip
+// sudo pip3 install --upgrade pip
+// sudo pip3 install virtualenv
+// su jenkins
+// cd /var/lib/jenkins/
+// virtualenv venv -p python3
+// source venv/bin/activate
+// pip install nodejsscan
+// cd /var/lib/jenkins/workspace/
+
+// njsscan | lolcat
+
+// njsscan juice-shop-pipeline/ --json -o /var/lib/jenkins/reports/njsscan-report-json
+
+// ../deactivate
         
     //ok
         stage ('Retire.js Analysis') {
