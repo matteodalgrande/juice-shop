@@ -51,7 +51,7 @@ pipeline {
 // //                sh 'njsscan juice-shop-pipeline/ --json -o /var/lib/jenkins/reports/njsscan-report-json'
 //                 sh '../deactivate'
 
-                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/nodejs.sh'
+                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
             }
         }
 
