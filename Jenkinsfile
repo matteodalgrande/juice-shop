@@ -10,46 +10,46 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-    // //ok
-        // stage ('Build') {
-        //     steps {
-        //         //fa npm install e include anche postinstall che richiama build
-        //         sh 'whoami'
-        //         sh 'npm install'
-        //     }
-        // }
     //ok
-        // stage ('SonarQube Analysis') {
-        //     environment {
-        //         scannerHome = tool 'SonarQubeScanner'
-        //     }
-        //     steps {
-        //         withSonarQubeEnv ('SonarQube') {
-        //             sh '${scannerHome}/bin/sonar-scanner'
-        //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-        //         }
-        //     }
-        // }
+        stage ('Build') {
+            steps {
+                //fa npm install e include anche postinstall che richiama build
+                sh 'whoami'
+                sh 'npm install'
+            }
+        }
+    // ok
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                }
+            }
+        }
     //ok
-        // stage ('NPM Audit Analysis') {
-        //     steps {
-        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-        //     }
-        // }
+        stage ('NPM Audit Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+            }
+        }
     //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-        // stage ('NodeJsScan Analysis') {
-        //     steps {
-        //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-        //     }
-        // }
+        stage ('NodeJsScan Analysis') {
+            steps {
+                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+            }
+        }
     //ok    prettyPrint json
-        // stage ('Retire.js Analysis') {
-        //     steps {
-        //         sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-        //         sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-        //         sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-        //     }
-        // }
+        stage ('Retire.js Analysis') {
+            steps {
+                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+                sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+            }
+        }
         
     //?????????????????????????????????????????????????????????????????????????
         // stage ('Dependency-Check Analysis') {
@@ -58,11 +58,11 @@ pipeline {
         // }
 
     //ok
-        // stage ('Audit.js Analysis') {
-        //     steps {
-        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-        //     }
-        // }
+        stage ('Audit.js Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+            }
+        }
 
     //ok
         stage ('Snyk Analysis') {
@@ -176,11 +176,15 @@ pipeline {
         //     }
         // }
     }
+ 
+
+//NON COMPLETO devi mettere i report 
     // post{
     //     always{
     //         echo 'SONO IL POST!'
     //     }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
+    //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
     // }
 
 }
