@@ -66,8 +66,11 @@ pipeline {
 
     //ok
         stage ('Snyk Analysis') {
+             environment {
+                SNYK_TOKEN = credentials('SNYK_TOKEN')
+            }
             steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
                 
             }
         }
@@ -173,10 +176,11 @@ pipeline {
         //     }
         // }
     }
-            post{
-                   dir('/var/lib/jenkins/reports/') {
-                    archiveArtifacts artifacts: '**', fingerprint: true
-            }
+    post{
+        always{
+            echo 'SONO IL POST!'
         }
+    //https://www.jenkins.io/doc/book/pipeline/syntax/#post
+    }
 
 }
