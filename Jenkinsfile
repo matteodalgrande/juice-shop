@@ -43,20 +43,20 @@ pipeline {
         //     }
         // }
     //ok    prettyPrint json
-        stage ('Retire.js Analysis') {
-            steps {
-                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-            }
-        }
+        // stage ('Retire.js Analysis') {
+        //     steps {
+        //         sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+        //         sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+        //         sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+        //     }
+        // }
         
     //?????????????????????????????????????????????????????????????????????????
         // stage ('Dependency-Check Analysis') {
-        //     steps {
         //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan `pwd` --format JSON --out ${JENKINS_HOME}/reports/dependency-check-report --prettyPrint'
         //     }
         // }
+
 
         stage ('Audit.js Analysis') {
             steps {
