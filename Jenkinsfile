@@ -64,11 +64,11 @@ pipeline {
         //     }
         // }
 
-        // stage ('Snyk Analysis') {
-        //     steps {
-        //         sh '/${JENKINS_HOME}/workspace/djuice-shop-pipeline/snyk.sh'
-        //     }
-        // }
+        stage ('Snyk Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
+            }
+        }
 
         // stage('standard-code and angular-linting'){
         //         //Standard fix formatta automaticamente il codice in un formato standard
