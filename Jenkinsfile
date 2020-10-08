@@ -41,13 +41,11 @@ pipeline {
             steps {
                 // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
                 // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
-                sh 'cd ${JENKINS_HOME}'
-                sh 'virtualenv venv -p python3'
-                sh 'source venv/bin/activate'
+                sh 'virtualenv ${JENKINS_HOME}/venv -p python3'
+                sh 'source ${JENKINS_HOME}/venv/bin/activate'
                 sh 'pip install nodejsscan'
-                sh '${JENKINS_HOME/workspace}'
                 sh 'njscan'
-                sh 'njsscan juice-shop-pipeline/routes/profileImageUrlUpload.js --json -o /var/lib/jenkins/reports/njsscan-report-json'
+                sh 'njsscan ${JENKINS_HOME}/workspace/juice-shop-pipeline/routes/profileImageUrlUpload.js --json -o /var/lib/jenkins/reports/njsscan-report-json'
 //                sh 'njsscan juice-shop-pipeline/ --json -o /var/lib/jenkins/reports/njsscan-report-json'
                 sh '../deactivate'
             }
