@@ -66,12 +66,12 @@ pipeline {
         // }
        
         snykSecurity failOnIssues: false, snykInstallation: 'snyk_v2', snykTokenId: 'ab486ecf-7c34-478e-b567-3826dc975512'
-        stage ('Snyk Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
+        // stage ('Snyk Analysis') {
+        //     steps {
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh'
                 
-            }
-        }
+        //     }
+        // }
 
         // stage('standard-code and angular-linting'){
         //         //Standard fix formatta automaticamente il codice in un formato standard
