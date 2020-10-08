@@ -41,6 +41,7 @@ pipeline {
             steps {
                 // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
                 // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
+                sh 'rm -r ${JENKINS_HOME}/venv || true'
                 sh 'virtualenv ${JENKINS_HOME}/venv -p python3'
                 sh 'source ${JENKINS_HOME}/venv/bin/activate'
                 sh 'pip install nodejsscan'
