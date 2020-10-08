@@ -36,36 +36,17 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
-
-        stage ('NodeJsScan Analysis') {
-            steps {
-                // sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline'
-                // sh 'nodejsscan --directory `pwd` --output ${JENKINS_HOME}/reports/nodejsscan-report'
-                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-            }
-        }
-
-// install venv da sudo matteo
-// sudo apt-get install python3-pip
-// sudo pip3 install --upgrade pip
-// sudo pip3 install virtualenv
-// su jenkins
-// cd /var/lib/jenkins/
-// virtualenv venv -p python3
-// source venv/bin/activate
-// pip install nodejsscan
-// cd /var/lib/jenkins/workspace/
-
-// njsscan | lolcat
-
-// njsscan juice-shop-pipeline/ --json -o /var/lib/jenkins/reports/njsscan-report-json
-
-// ../deactivate
+    //ok
+        // stage ('NodeJsScan Analysis') {
+        //     steps {
+        //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+        //     }
+        // }
         
     //ok
         stage ('Retire.js Analysis') {
             steps {
-                sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
             }
         }
         
