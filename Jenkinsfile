@@ -99,6 +99,7 @@ pipeline {
             steps {
                 //test mocha on chromium
                 sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
+                sh 'pwd'
                 sh 'ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd ..'
                 sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
             }
