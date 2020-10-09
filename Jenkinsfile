@@ -78,14 +78,14 @@ pipeline {
     //         }
     //     }
 
-        // stage('standard-code and angular-linting'){
-        //         //Standard fix formatta automaticamente il codice in un formato standard
-        //         //il linting in angular controlla la qualita' del codice angular nel progetto
-        //         steps{
-        //         sh 'whoami'
-        //         sh 'npx standard --fix && cd frontend && npx ng lint --format=json > /{JENKINS HOME DIRECTORY}/reports/ng-lint-report && cd ..'
-        //     }
-        // }
+        stage('standard-code and angular-linting'){
+                //Standard fix formatta automaticamente il codice in un formato standard
+                //il linting in angular controlla la qualita' del codice angular nel progetto
+                steps{
+                sh 'whoami'
+                sh 'npx standard --fix && cd frontend && npx ng lint --format=json > /{JENKINS HOME DIRECTORY}/reports/ng-lint-report && cd ..'
+            }
+        }
 
         // stage ('Unit test') {
         //     steps {
