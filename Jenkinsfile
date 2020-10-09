@@ -15,7 +15,7 @@ pipeline {
             steps {
                 //fa npm install e include anche postinstall che richiama build
                 sh 'whoami'
-                sh 'npm install'
+                sh 'npm install --package-lock'
             }
         }
     // // ok
@@ -55,7 +55,7 @@ pipeline {
     // //ok
         // stage ('Dependency-Check Analysis') {
         //     steps{
-        //         sh 'npm i --package-lock'
+        // //        sh 'npm i --package-lock'
         //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
         //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
         //     }
@@ -89,8 +89,14 @@ pipeline {
         stage ('Unit test') {
             steps {
                 //test mocha on chromium
-                sh 'cd frontend && ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
-    
+                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
+                sh 'wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip'
+                sh 'unzip chromedriver_linux64.zip'
+                sh 'ng test --watch=false --source-map=false --browsers=ChromiumHeadless'
+                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/' 
+                sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+                sh 'rm ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend/chromedriver_linux64.zip'
+                sh 'sudo rm ./chromedriver*'
             }
         }
 
