@@ -97,7 +97,6 @@ pipeline {
         stage ('Unit test') {
             steps {
                 //test mocha on chromium
-                sh 'cd frontend npm i puppeteer --save'
                 sh 'cd frontend && ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd .. && nyc --report-dir=${JENKINS_HOME}/reports/coverage/server-tests mocha test/server'
             }
         }
