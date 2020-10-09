@@ -80,19 +80,19 @@ pipeline {
     //     }
 
     // //ok
-        stage('standard-code and angular-linting'){
-                steps{
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-            }
-        }
-
-        // stage ('Unit test') {
-        //     steps {
-        //         //test mocha on chromium
-        //         sh 'cd frontend && ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
-    
+        // stage('standard-code and angular-linting'){
+        //         steps{
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
         //     }
         // }
+
+        stage ('Unit test') {
+            steps {
+                //test mocha on chromium
+                sh 'cd frontend && ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+    
+            }
+        }
 
         // stage ('Integration test') {
         //     // integration test--> cambi il file node_modules/jest/node_modules/jest_cli/bin/jest.js sostituendo     process.env.NODE_ENV = 'test'; con     process.env.NODE_ENV = ''; e poi elimini[commenti l'ultimo test dentro l'if] il file /test/api/fileUploadSpec.js ",
