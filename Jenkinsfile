@@ -90,12 +90,8 @@ pipeline {
             steps {
                 //test mocha on chromium
                 sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
-                sh 'wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip'
-                sh 'unzip chromedriver_linux64.zip'
                 sh 'ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd ..'
                 sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
-                sh 'rm ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend/chromedriver_linux64.zip'
-                sh 'sudo rm ./chromedriver*'
             }
         }
 
