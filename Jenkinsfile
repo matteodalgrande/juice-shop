@@ -14,7 +14,6 @@ pipeline {
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
-                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
                 sh 'npm install --package-lock'
             }
         }
@@ -98,10 +97,10 @@ pipeline {
         stage ('Unit test') {
             steps {
                 //test mocha on chromium
-                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
+                sh 'cd frontend'
                 sh 'pwd'
                 sh 'ng test --watch=false --source-map=false --browsers=ChromiumHeadless && cd ..'
-                sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+                sh 'nyc --report-dir=${JENKINS_HOME}/reports/coverage/server-tests mocha test/server'
             }
         }
 
