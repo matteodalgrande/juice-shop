@@ -26,7 +26,7 @@ exports.config = {
   ],
 
   capabilities: {
-    browserName: 'chrome',
+    browserName: 'chromium-browser',
     proxy: proxy,
     chromeOptions: {
       args: ['--window-size=1024,768']
