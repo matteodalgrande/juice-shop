@@ -83,7 +83,7 @@ pipeline {
                 //il linting in angular controlla la qualita' del codice angular nel progetto
                 steps{
                 sh 'whoami'
-                sh 'npx standard --fix && cd frontend && npx ng lint --format=json > /{JENKINS HOME DIRECTORY}/reports/ng-lint-report && cd ..'
+                sh 'npx standard --fix && cd frontend && npx ng lint --format=json > {JENKINS_HOME}/reports/ng-lint-report && cd ..'
             }
         }
 
