@@ -87,7 +87,7 @@ pipeline {
         // }
         stage('e2e'){
             steps{
-                sh 'npm protractor'
+                sh 'npm run protractor'
             }
         }
         // // // stage ('Unit test') {
