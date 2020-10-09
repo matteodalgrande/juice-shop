@@ -87,6 +87,7 @@ pipeline {
         // }
         stage('e2e'){
             steps{
+                sh 'spm run preprotractor'
                 sh 'npm run protractor'
             }
         }
