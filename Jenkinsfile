@@ -14,7 +14,7 @@ pipeline {
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
-                sh 'whoami'
+                sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend'
                 sh 'npm install --package-lock'
             }
         }
