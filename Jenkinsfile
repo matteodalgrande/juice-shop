@@ -10,7 +10,7 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-    //ok /
+    //ok
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
