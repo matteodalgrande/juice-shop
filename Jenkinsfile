@@ -116,7 +116,7 @@ pipeline {
                 sh 'unzip chromedriver_linux64.zip'
                 sh 'rm chromedriver_linux64.zip'
 
-                sh 'cd frontend && ng test --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+                sh '(cd frontend && ng test --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server) | true'
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests jest --silent --runInBand --forceExit'
                 sh './test-reporter-latest-linux-amd64 before-build'
                 sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info | true'
