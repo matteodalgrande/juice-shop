@@ -119,7 +119,7 @@ pipeline {
                 sh 'cd frontend && ng test --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server /var/lib/jenkins/workspace/juice-shop-pipeline/frontend/src/app/**/*.spec.ts'
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests jest --silent --runInBand --forceExit'
                 sh './test-reporter-latest-linux-amd64 before-build'
-                sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
+                sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info | true'
                 sh './test-reporter-latest-linux-amd64 upload-coverage -r CC_TEST_REPOTER_ID'
                 sh './test-reporter-latest-linux-amd64 after-build'
 
