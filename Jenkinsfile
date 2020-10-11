@@ -116,7 +116,7 @@ pipeline {
                 sh 'unzip chromedriver_linux64.zip'
                 sh 'rm chromedriver_linux64.zip'
 
-                sh 'cd frontend && ng test --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+                sh 'cd frontend && ng test --codeCoverage=true --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
                 sh './test-reporter-latest-linux-amd64 before-build'
