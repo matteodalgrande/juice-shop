@@ -107,16 +107,16 @@ describe('/file-upload', () => {
       })
     })
 
-    it('POST file type XML with dev/random attack', () => {
-      const file = path.resolve(__dirname, '../files/xxeDevRandom.xml')
-      const form = frisby.formData()
-      form.append('file', fs.createReadStream(file))
+    // it('POST file type XML with dev/random attack', () => {
+    //   const file = path.resolve(__dirname, '../files/xxeDevRandom.xml')
+    //   const form = frisby.formData()
+    //   form.append('file', fs.createReadStream(file))
 
-      return frisby.post(URL + '/file-upload', {
-        headers: { 'Content-Type': form.getHeaders()['content-type'] },
-        body: form
-      })
-    })
+    //   return frisby.post(URL + '/file-upload', {
+    //     headers: { 'Content-Type': form.getHeaders()['content-type'] },
+    //     body: form
+    //   })
+    // })
   }
 
   it('POST file too large for API', () => {
