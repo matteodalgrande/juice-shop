@@ -111,6 +111,7 @@ pipeline {
             }
             steps {
                 //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
+                sh 'rm chromedriver | true'
                 sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
                 sh 'unzip chromedriver_linux64.zip'
                 sh 'rm chromedriver_linux64.zip'
@@ -122,7 +123,7 @@ pipeline {
                 sh './test-reporter-latest-linux-amd64 upload-coverage -r CC_TEST_REPOTER_ID'
                 sh './test-reporter-latest-linux-amd64 after-build'
 
-                sh 'rm chromedriver_linux64'
+                sh 'rm chromedriver'
             }
         }
 
