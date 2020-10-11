@@ -120,8 +120,8 @@ pipeline {
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
                 sh './test-reporter-latest-linux-amd64 before-build'
-                sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info | true'
-                sh './test-reporter-latest-linux-amd64 upload-coverage -r CC_TEST_REPOTER_ID'
+                sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
+                sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPOTER_ID}'
                 sh './test-reporter-latest-linux-amd64 after-build'
 
                 sh 'rm chromedriver'
