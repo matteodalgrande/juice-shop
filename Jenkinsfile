@@ -105,7 +105,7 @@ pipeline {
             }
         }
 
-        // stage ('Integration test') {
+      //// stage ('Integration test') {
         //     // integration test--> cambi il file node_modules/jest/node_modules/jest_cli/bin/jest.js sostituendo     process.env.NODE_ENV = 'test'; con     process.env.NODE_ENV = ''; e poi elimini[commenti l'ultimo test dentro l'if] il file /test/api/fileUploadSpec.js ",
         //     steps {
         //         //frisby
