@@ -21,7 +21,8 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '/var/lib/jenkins/coverage/instanbull-frontend-tests'),
+      // dir: require('path').join(__dirname, '/var/lib/jenkins/coverage/instanbull-frontend-tests'),
+      dir: '../../build/reports/coverage/ng',
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
