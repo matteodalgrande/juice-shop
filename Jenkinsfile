@@ -129,7 +129,7 @@ pipeline {
                 // sh 'GIT_BRANCH=origin/master'
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
 
-//  - "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/frontend-tests/lcov.info"
+//          - "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/frontend-tests/lcov.info"
 //         - "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info"
 //         - "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info"
 //         - "./cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3"
@@ -140,7 +140,7 @@ pipeline {
                 sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.frontend.json' 
                 sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json'
 
-                sh './cc-test-reporter --debug sum-coverage build/reports/coverage/codeclimate.*.json -p 3' 
+                sh './cc-test-reporter --debug sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.*.json -p 3' 
                 sh './cc-test-reporter --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
                 sh 'rm cc-test-reporter'
