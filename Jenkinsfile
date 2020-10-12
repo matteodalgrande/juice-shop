@@ -127,9 +127,9 @@ pipeline {
                 CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
             }
             steps{
-sh 'echo $GIT_COMMIT_SHA'
+                sh 'echo $GIT_COMMIT_SHA'
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
-                sh 'GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
+                sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
 
                 sh 'echo $GIT_COMMIT_SHA'
