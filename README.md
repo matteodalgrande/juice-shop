@@ -1,5 +1,6 @@
 FORKED:
-[![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/bkimminich/juice-shop)](https://codeclimate.com/github/matteodalgrande/juice-shop/trends/technical_debt)
+[![Maintainability](https://api.codeclimate.com/v1/badges/dad887c5c14e8624011f/maintainability)](https://codeclimate.com/github/matteodalgrande/juice-shop/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/dad887c5c14e8624011f/test_coverage)](https://codeclimate.com/github/matteodalgrande/juice-shop/test_coverage)
 
 # ![Juice Shop Logo](https://raw.githubusercontent.com/bkimminich/juice-shop/master/frontend/src/assets/public/images/JuiceShop_Logo_100px.png) OWASP Juice Shop
 
