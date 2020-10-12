@@ -125,10 +125,12 @@ pipeline {
                 sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
                 sh 'chmod 777 test-reporter-latest-linux-amd64'
 
+                sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
+
                 sh './test-reporter-latest-linux-amd64 before-build'
                 sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
                 sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPORTER_ID}'
-                sh './test-reporter-latest-linux-amd64 after-build -r ${CC_TEST_REPORTER_ID}'
+                sh './test-reporter-latest-linux-amd64 -t simplecov -r ${CC_TEST_REPORTER_ID} --exit-code $? || echo  “Skipping Code Climate coverage upload”'
 
                 sh 'rm test-reporter-latest-linux-amd64'
             }
