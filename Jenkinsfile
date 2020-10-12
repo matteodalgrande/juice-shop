@@ -11,12 +11,12 @@ pipeline {
             }
         }
     //ok
-        stage ('Build') {
-            steps {
-                //fa npm install e include anche postinstall che richiama build
-                sh 'npm install --package-lock -test'
-            }
-        }
+        // stage ('Build') {
+        //     steps {
+        //         //fa npm install e include anche postinstall che richiama build
+        //         sh 'npm install --package-lock -test'
+        //     }
+        // }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -105,6 +105,12 @@ pipeline {
         //     }
         // }
 
+        // stage('unit test'){
+        //     steps{
+        //         sh 'cd frontend && ng test --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+        //     }
+        // }
+
         stage('code climate'){
             environment {
                 CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
@@ -116,7 +122,6 @@ pipeline {
                 sh 'unzip chromedriver_linux64.zip'
                 sh 'rm chromedriver_linux64.zip'
 
-                sh 'cd frontend && ng test --codeCoverage=true --watch=false --source-map=true && cd .. && nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
                 sh './test-reporter-latest-linux-amd64 before-build'
