@@ -93,31 +93,14 @@ pipeline {
         //     }
         // }
 
-
-        // stage ('Unit test') {
-        //     steps {
-        //         //test mocha on chromium
-        //         sh 'cd frontend && \
-        //         ng test --watch=false --source-map=false && \
-        //         cd .. && \
-        //         nyc --report-dir=${JENKINS_HOME}/reports/coverage/server-tests mocha test/server'
-        //         // sh 'npm test'
-        //     }
-        // }
-
-        stage('unit test'){
+        stage('Unit Test'){
             steps{
-                sh 'cd frontend'
-                sh 'ng test --watch=false --source-map=true'
-                sh 'cd ..'
+                sh 'cd frontend && ng test --watch=false --source-map=true'
                 sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
             }
         }
 
-        stage('code climate'){
-            environment {
-                CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
-            }
+        stage('Integration Test'){
             steps {
                 //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
                 sh 'rm chromedriver | true'
@@ -127,12 +110,18 @@ pipeline {
 
                 sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
+                sh 'rm chromedriver'
+            }
+        }
+        stage('Code Climate'){
+            environment {
+                CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
+            }
+            steps{
                 sh './test-reporter-latest-linux-amd64 before-build'
                 sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
                 sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPOTER_ID}'
                 sh './test-reporter-latest-linux-amd64 after-build'
-
-                sh 'rm chromedriver'
             }
         }
 
