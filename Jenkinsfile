@@ -132,6 +132,8 @@ pipeline {
                 sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
 
+                sh 'echo $GIT_COMMIT_SHA'
+
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
                 sh 'GIT_BRANCH=master'
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
