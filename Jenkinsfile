@@ -88,6 +88,7 @@ pipeline {
     // //ok
         stage('Unit Test'){
             steps{
+                sh 'pwd'
                 sh 'cd frontend && ng test --watch=false --source-map=true'
                 sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
             }
@@ -97,6 +98,7 @@ pipeline {
         stage('Integration Test'){
             steps {
                 //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
+                sh 'pwd'
                 sh 'rm chromedriver | true'
                 sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
                 sh 'unzip chromedriver_linux64.zip'
@@ -114,6 +116,7 @@ pipeline {
                 CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
             }
             steps{
+                sh 'pwd'
                 sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
                 sh 'chmod 777 test-reporter-latest-linux-amd64'
 
