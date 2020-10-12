@@ -136,8 +136,8 @@ pipeline {
 //         - "./cc-test-reporter upload-coverage"
 
                 sh './test-reporter-latest-linux-amd64 --debug before-build'
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.frontend.json ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info' 
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.server.json ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/server-tests/lcov.info'
+                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/ng/lcov.info' 
+                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info'
                 sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info'
 
                 sh './test-reporter-latest-linux-amd64  sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline@2/build/reports/coverage/codeclimate.*.json -p 3' 
