@@ -107,20 +107,20 @@ pipeline {
         // }
 
      //ok
-        stage('Integration Test'){
-            steps {
-                //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
-                sh 'pwd'
-                sh 'rm chromedriver | true'
-                sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
-                sh 'unzip chromedriver_linux64.zip'
-                sh 'rm chromedriver_linux64.zip'
+        // stage('Integration Test'){
+        //     steps {
+        //         //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
+        //         sh 'pwd'
+        //         sh 'rm chromedriver | true'
+        //         sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
+        //         sh 'unzip chromedriver_linux64.zip'
+        //         sh 'rm chromedriver_linux64.zip'
 
-                sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
+        //         sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
-                sh 'rm chromedriver'
-            }
-        }
+        //         sh 'rm chromedriver'
+        //     }
+        // }
 
 
         stage('Code Climate'){
