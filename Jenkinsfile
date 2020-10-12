@@ -129,7 +129,7 @@ pipeline {
             steps{
 
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
-                sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
+                sh 'GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
 
                 sh 'echo $GIT_COMMIT_SHA'
