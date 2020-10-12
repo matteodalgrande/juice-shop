@@ -122,7 +122,7 @@ pipeline {
             }
         }
 
-     //ok
+
         stage('Code Climate'){
             environment {
                 CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
