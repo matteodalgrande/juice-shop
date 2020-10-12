@@ -11,12 +11,12 @@ pipeline {
             }
         }
     //ok
-        // stage ('Build') {
-        //     steps {
-        //         //fa npm install e include anche postinstall che richiama build
-        //         sh 'npm install --package-lock -test'
-        //     }
-        // }
+        stage ('Build') {
+            steps {
+                //fa npm install e include anche postinstall che richiama build
+                sh 'npm install --package-lock -test'
+            }
+        }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
