@@ -95,7 +95,7 @@ pipeline {
 
         stage('Unit Test'){
             steps{
-                sh 'cd frontend && ng test --watch=false --source-map=true'
+                sh 'frontend/ng test --watch=false --source-map=true'
                 sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
             }
         }
