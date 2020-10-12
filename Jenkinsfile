@@ -117,13 +117,13 @@ pipeline {
                 sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
                 sh 'chmod 777 test-reporter-latest-linux-amd64'
 
-                sh 'echo $GIT_COMMIT # only needed for debugging'
-                sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
-                sh 'echo $GIT_COMMIT # only needed for debugging'
+                // sh 'echo $GIT_COMMIT # only needed for debugging'
+                // sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
+                // sh 'echo $GIT_COMMIT # only needed for debugging'
 
-                sh 'echo $GIT_BRANCH # only needed for debugging'
-                sh 'GIT_BRANCH=origin/master'
-                sh 'echo $GIT_BRANCH # only needed for debugging'
+                // sh 'echo $GIT_BRANCH # only needed for debugging'
+                // sh 'GIT_BRANCH=origin/master'
+                // sh 'echo $GIT_BRANCH # only needed for debugging'
 
                 sh './test-reporter-latest-linux-amd64 --debug before-build'
                 sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info' //build/reports/coverage/api-tests/lcov.info 
