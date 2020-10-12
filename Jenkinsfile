@@ -137,8 +137,8 @@ pipeline {
 
                 sh './cc-test-reporter --debug before-build'
                 sh './cc-test-reporter --debug format-coverage build/reports/coverage/server-tests/lcov.info -t lcov -o build/reports/coverage/codeclimate.server.json'
-                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info' 
-                sh './cc-test-reporter --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info'
+                sh './cc-test-reporter --debug format-coverage build/reports/coverage/ng/lcov.info -t lcov -o build/reports/coverage/codeclimate.frontend.json' 
+                sh './cc-test-reporter --debug format-coverage build/reports/coverage/api-tests/lcov.info -t lcov -o build/reports/coverage/codeclimate.api.json'
 
                 sh './cc-test-reporter  sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline@2/build/reports/coverage/codeclimate.*.json -p 3' 
                 sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
