@@ -15,7 +15,7 @@ pipeline {
     //         steps {
     //             sh 'pwd'
     //             //fa npm install e include anche postinstall che richiama build
-    //             sh 'npm install --package-lock -test'
+    //             sh 'npm install --package-lock'
     //         }
     //     }
     // // ok
@@ -92,6 +92,7 @@ pipeline {
                 sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
                 sh 'chmod 777  cc-test-reporter'
                 sh 'npm install'
+                sh  'export NODE_ENV=test'
                 sh './cc-test-reporter --debug before-build'
             }
         }
@@ -149,7 +150,7 @@ pipeline {
                 // sh './cc-test-reporter --debug sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.*.json -p 3' 
                 // sh './cc-test-reporter --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
-                sh 'rm cc-test-reporter'
+        //        sh 'rm cc-test-reporter'
             }
         }
         
