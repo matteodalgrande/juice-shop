@@ -123,6 +123,7 @@ pipeline {
             }
             steps{
                 sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
+                sh 'chmod 777 test-reporter-latest-linux-amd64'
 
                 sh './test-reporter-latest-linux-amd64 before-build'
                 sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
