@@ -125,9 +125,8 @@ pipeline {
                 // sh 'GIT_BRANCH=origin/master'
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
 
-                // sh './test-reporter-latest-linux-amd64 --debug before-build'
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info' //build/reports/coverage/api-tests/lcov.info 
-                // sh './test-reporter-latest-linux-amd64 sum-coverage build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info' //build/reports/coverage/api-tests/lcov.info
+                sh './test-reporter-latest-linux-amd64 --debug before-build'
+                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info build/reports/coverage/api-tests/lcov.info' 
                 sh './test-reporter-latest-linux-amd64 --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
                 sh 'rm test-reporter-latest-linux-amd64'
