@@ -118,8 +118,8 @@ pipeline {
             }
             steps{
                 sh 'pwd'
-                sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
-                sh 'chmod 777 test-reporter-latest-linux-amd64'
+                sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
+                sh 'chmod 777  cc-test-reporter'
 
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
                 // sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
@@ -135,15 +135,15 @@ pipeline {
 //         - "./cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3"
 //         - "./cc-test-reporter upload-coverage"
 
-                sh './test-reporter-latest-linux-amd64 --debug before-build'
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage build/reports/coverage/server-tests/lcov.info -t lcov -o build/reports/coverage/codeclimate.server.json'
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info' 
-                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info'
+                sh './cc-test-reporter --debug before-build'
+                sh './cc-test-reporter --debug format-coverage build/reports/coverage/server-tests/lcov.info -t lcov -o build/reports/coverage/codeclimate.server.json'
+                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info' 
+                sh './cc-test-reporter --debug format-coverage -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json -p ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info'
 
-                sh './test-reporter-latest-linux-amd64  sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline@2/build/reports/coverage/codeclimate.*.json -p 3' 
-                sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPORTER_ID}'
+                sh './cc-test-reporter  sum-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline@2/build/reports/coverage/codeclimate.*.json -p 3' 
+                sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
-                sh 'rm test-reporter-latest-linux-amd64'
+                sh 'rm cc-test-reporter'
             }
         }
         
