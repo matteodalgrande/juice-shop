@@ -84,14 +84,6 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
         //     }
         // }
-        
-        
-        // stage('e2e'){
-        //     steps{
-        //         sh 'spm run preprotractor'
-        //         sh 'npm run protractor'
-        //     }
-        // }
 
     // //ok
     //     stage('Unit Test'){
@@ -116,7 +108,7 @@ pipeline {
         //     }
         // }
 
-
+     //ok
         stage('Code Climate'){
             environment {
                 CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
@@ -130,24 +122,24 @@ pipeline {
                 sh 'echo $GIT_COMMIT # only needed for debugging'
 
                 sh 'echo $GIT_BRANCH # only needed for debugging'
-                sh 'GIT_BRANCH=master'
-                sh 'echo $GIT BRANCH # only needed for debugging'
+                sh 'GIT_BRANCH=origin/master'
+                sh 'echo $GIT_BRANCH # only needed for debugging'
 
-                sh './test-reporter-latest-linux-amd64 before-build'
-                sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
-                sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPORTER_ID}'
-                sh './test-reporter-latest-linux-amd64 after-build -t lcov -r ${CC_TEST_REPORTER_ID} --exit-code $? || echo  “Skipping Code Climate coverage upload”'
+                sh './test-reporter-latest-linux-amd64 --debug before-build'
+                sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
+                sh './test-reporter-latest-linux-amd64 --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
+                sh './test-reporter-latest-linux-amd64 --debug after-build -t lcov -r ${CC_TEST_REPORTER_ID} --exit-code $? || echo  “Skipping Code Climate coverage upload”'
 
                 sh 'rm test-reporter-latest-linux-amd64'
             }
         }
-
-      //// stage ('Integration test') {
-        //     // integration test--> cambi il file node_modules/jest/node_modules/jest_cli/bin/jest.js sostituendo     process.env.NODE_ENV = 'test'; con     process.env.NODE_ENV = ''; e poi elimini[commenti l'ultimo test dentro l'if] il file /test/api/fileUploadSpec.js ",
-        //     steps {
-        //         //frisby
-        //         sh 'nyc --report-dir=./build/reports/coverage/api-tests jest --silent --runInBand --forceExit'
+        
+        // stage('e2e'){
+        //     steps{
+        //         sh 'spm run preprotractor'
+        //         sh 'npm run protractor'
         //     }
+        // }
         // }
         // stage ('e2e test') {
         //         // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
