@@ -22,7 +22,7 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       // dir: require('path').join(__dirname, '/var/lib/jenkins/coverage/instanbull-frontend-tests'),
-      dir: '../build/reports/coverage/ng',
+      dir: '../build/reports/coverage/frontend-tests',
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
