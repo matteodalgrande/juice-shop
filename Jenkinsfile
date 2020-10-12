@@ -122,11 +122,11 @@ pipeline {
                 sh 'chmod 777  cc-test-reporter'
 
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
-                // sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
+                sh 'GIT_COMMIT=$(git log | grep -m1 -oE \'[^ ]+$\')'
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
 
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
-                // sh 'GIT_BRANCH=origin/master'
+                sh 'GIT_BRANCH=origin/master'
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
 
          sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/ng/lcov.info"
