@@ -126,15 +126,15 @@ pipeline {
                 // sh 'echo $GIT_COMMIT # only needed for debugging'
 
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
-                sh 'GIT_BRANCH=origin/master'
+                sh 'GIT_BRANCH=master'
                 // sh 'echo $GIT_BRANCH # only needed for debugging'
 
-         sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/ng/lcov.info"
-        sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info"
-        sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info"
-        sh "./cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3"
-        sh "./cc-test-reporter upload-coverage"
-
+                sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.frontend.json build/reports/coverage/ng/lcov.info"
+                sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info"
+                sh "./cc-test-reporter format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info"
+                sh "./cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3"
+                sh "./cc-test-reporter upload-coverage"
+                sh './cc-test-reporter after-test'
                 // sh './cc-test-reporter --debug before-build'
                 // sh './cc-test-reporter format-coverage --debug ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/server-tests/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.server.json'
                 // sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.frontend.json' 
