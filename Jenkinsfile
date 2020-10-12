@@ -140,8 +140,8 @@ pipeline {
                 sh './cc-test-reporter --debug format-coverage build/reports/coverage/ng/lcov.info -t lcov -o build/reports/coverage/codeclimate.frontend.json' 
                 sh './cc-test-reporter --debug format-coverage build/reports/coverage/api-tests/lcov.info -t lcov -o build/reports/coverage/codeclimate.api.json'
 
-                sh './cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3' 
-                sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
+                sh './cc-test-reporter --debug sum-coverage build/reports/coverage/codeclimate.*.json -p 3' 
+                sh './cc-test-reporter --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
                 sh 'rm cc-test-reporter'
             }
