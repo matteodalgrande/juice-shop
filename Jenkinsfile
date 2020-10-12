@@ -86,16 +86,16 @@ pipeline {
         //     }
         // }
 
-        // stage('pre Code Climate'){
-        //     steps{
-        //         sh 'pwd'
-        //         sh 'wget https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
-        //         sh 'chmod 777  cc-test-reporter'
-        //    //     sh 'npm install'
-        //         sh  'export NODE_ENV=test'
-        //         sh './cc-test-reporter --debug before-build'
-        //     }
-        // }
+        stage('pre Code Climate'){
+            steps{
+                sh 'pwd'
+                sh 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
+                sh 'chmod 777  cc-test-reporter'
+           //     sh 'npm install'
+                sh  'export NODE_ENV=test'
+                sh './cc-test-reporter --debug before-build'
+            }
+        }
     // //ok
         // stage('Unit Test'){
         //     steps{
