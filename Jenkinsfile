@@ -125,7 +125,7 @@ pipeline {
                 sh './test-reporter-latest-linux-amd64 before-build'
                 sh './test-reporter-latest-linux-amd64 format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
                 sh './test-reporter-latest-linux-amd64 upload-coverage -r ${CC_TEST_REPORTER_ID}'
-                sh './test-reporter-latest-linux-amd64 after-build'
+                sh './test-reporter-latest-linux-amd64 after-build -r ${CC_TEST_REPORTER_ID}'
             }
         }
 
