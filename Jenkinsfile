@@ -127,9 +127,9 @@ pipeline {
 
                 sh './test-reporter-latest-linux-amd64 --debug before-build'
                 sh './test-reporter-latest-linux-amd64 --debug format-coverage -t lcov build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
+                sh './test-reporter-latest-linux-amd64 --debug sum-coverage build/reports/coverage/api-tests/lcov.info build/reports/coverage/server-tests/lcov.info build/reports/coverage/ng/lcov.info'
                 sh './test-reporter-latest-linux-amd64 --debug upload-coverage -r ${CC_TEST_REPORTER_ID}'
-                sh './test-reporter-latest-linux-amd64 --debug after-build -t lcov -r ${CC_TEST_REPORTER_ID} --exit-code $? || echo  “Skipping Code Climate coverage upload”'
-
+              
                 sh 'rm test-reporter-latest-linux-amd64'
             }
         }
