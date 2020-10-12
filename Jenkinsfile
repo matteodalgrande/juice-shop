@@ -136,7 +136,7 @@ pipeline {
 //         - "./cc-test-reporter upload-coverage"
 
                 sh './cc-test-reporter --debug before-build'
-                sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/server-tests/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.server.json'
+                sh './cc-test-reporter --debug format-coverage --debug ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/server-tests/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.server.json'
                 sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/ng/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.frontend.json' 
                 sh './cc-test-reporter --debug format-coverage ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/api-tests/lcov.info -t lcov -o ${JENKINS_HOME}/workspace/juice-shop-pipeline/build/reports/coverage/codeclimate.api.json'
 
