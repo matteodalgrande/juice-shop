@@ -121,24 +121,24 @@ pipeline {
         //         sh 'rm chromedriver'
         //     }
         // }
-    // //ok
-        // stage('Code Climate'){
-        //     environment {
-        //         CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
-        //     }
-        //     steps{
-        //         sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
-        //         sh 'export GIT_BRANCH=master'
+    //ok
+        stage('Code Climate'){
+            environment {
+                CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
+            }
+            steps{
+                sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
+                sh 'export GIT_BRANCH=master'
 
-        //         sh 'cd frontend && ./cc-test-reporter --debug format-coverage -t lcov -o ../build/reports/coverage/codeclimate.frontend.json ../build/reports/coverage/frontend-tests/lcov.info'
-        //         sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info'
-        //         sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info'
-        //         sh './cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3'
-        //         sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
+                sh 'cd frontend && ./cc-test-reporter --debug format-coverage -t lcov -o ../build/reports/coverage/codeclimate.frontend.json ../build/reports/coverage/frontend-tests/lcov.info'
+                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info'
+                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info'
+                sh './cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3'
+                sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
-        //         sh 'rm cc-test-reporter && rm frontend/cc-test-reporter'
-        //     }
-        // }
+                sh 'rm cc-test-reporter && rm frontend/cc-test-reporter'
+            }
+        }
         
         // stage('e2e'){
         //     steps{
@@ -146,19 +146,19 @@ pipeline {
         //         sh 'npm run protractor'
         //     }
         // }
-        stage ('e2e test') {
-                // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
-            steps {
-                //preprotractor
-                sh 'npm dedupe && node ./node_modules/protractor/bin/webdriver-manager update --gecko false'
-                //protractor
-                sh 'npm run e2e'
-                //e2e test
-                sh 'node test/e2eTests.js'
-                //vagrant 
-                sh 'cd vagrant && vagrant up'
-            }
-        }
+        // stage ('e2e test') {
+        //         // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
+        //     steps {
+        //         //preprotractor
+        //         sh 'npm dedupe && node ./node_modules/protractor/bin/webdriver-manager update --gecko false'
+        //         //protractor
+        //         sh 'npm run e2e'
+        //         //e2e test
+        //         sh 'node test/e2eTests.js'
+        //         //vagrant 
+        //         sh 'cd vagrant && vagrant up'
+        //     }
+        // }
         // stage ('Start App') {
         //     steps {
         //         sh 'node app"'
