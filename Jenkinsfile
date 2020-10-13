@@ -124,7 +124,7 @@ pipeline {
     //ok
         stage('Code Climate'){
             environment {
-                CC_TEST_REPORTER_ID = credentials('7da93b1f-3602-458c-a07c-fcf36402c499')
+                CC_TEST_REPORTER_ID = credentials('	b979eca6-f885-43d7-b055-6f4cb572fe07')
             }
             steps{
                 sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
