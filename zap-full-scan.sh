@@ -6,3 +6,5 @@ docker run --rm --name zap2 -u zap -v "/var/lib/jenkins/reports":/zap/wrk/:rw -t
                         auth.password_field='password' \
                         auth.submit_field='loginButton' \
                         auth.auto=1"
+
+echo $? > /dev/null
