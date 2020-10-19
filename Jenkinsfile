@@ -142,7 +142,7 @@ pipeline {
 
         stage('DAST - start app'){
             steps{
-                sh 'npm start'
+                sh 'npm start &'
             }
         }
         // stage('DAST - ZAP full scan'){
