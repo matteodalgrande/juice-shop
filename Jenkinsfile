@@ -142,6 +142,7 @@ pipeline {
 
         stage('DAST - start app'){
             steps{
+                sh 'pwd'
                 sh 'npm start &'
             }
         }
@@ -161,6 +162,7 @@ pipeline {
                 HOME_DIRECTORY = '/home/matteo'
             }
             steps {
+                sh 'pwd'
                 sh '${PATH_TO_SCRIPT}/w3af/w3af_console -s ${PATH_TO_SCRIPT}/configurazione.w3af'
                 sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:/${HOME_DIRECTORY}/'
                 sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:/${HOME_DIRECTORY}/'
