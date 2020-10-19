@@ -164,9 +164,11 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
-                sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:/${HOME_DIRECTORY}/'
-                sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:/${HOME_DIRECTORY}/'
-                sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:/${HOME_DIRECTORY}/'
+                sh '''
+                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:/${HOME_DIRECTORY}/ || \
+                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:/${HOME_DIRECTORY}/ || \
+                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:/${HOME_DIRECTORY}/
+                    '''
             }
         }
 
@@ -175,9 +177,11 @@ pipeline {
                 HOME_DIRECTORY = '/home/matteo'
             }
             steps {
-                sh 'cp ${HOME_DIRECTORY}/output-w3af.json ${JENKINS_HOME}/reports/w3af-report.json'
-                sh 'cp ${HOME_DIRECTORY}/output-w3af.html ${JENKINS_HOME}/reports/w3af-report.html'
-                sh 'cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt'                                
+                sh '''
+                    cp ${HOME_DIRECTORY}/output-w3af.json ${JENKINS_HOME}/reports/w3af-report.json || \
+                    cp ${HOME_DIRECTORY}/output-w3af.html ${JENKINS_HOME}/reports/w3af-report.html || \
+                    cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
+                    '''                                
             }
         }
 
