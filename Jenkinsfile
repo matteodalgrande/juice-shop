@@ -124,7 +124,7 @@ pipeline {
     // //ok
     //     stage('Code Climate'){
     //         environment {
-    //             CC_TEST_REPORTER_ID = credentials('	b979eca6-f885-43d7-b055-6f4cb572fe07')
+    //             CC_TEST_REPORTER_ID = credentials('b979eca6-f885-43d7-b055-6f4cb572fe07')
     //         }
     //         steps{
     //             sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
@@ -160,6 +160,7 @@ pipeline {
                 PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
                 PATH_TO_OUTPUT = '/home/matteo/Desktop'
                 HOME_DIRECTORY = '/home/matteo'
+                SSH_PASSPHRASE = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
             }
             steps {
                 sh 'pwd'
