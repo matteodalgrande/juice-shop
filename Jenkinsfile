@@ -157,13 +157,13 @@ pipeline {
                 label 'w3af'
             }
             environment {
-                PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af/scripts'
-                PATH_TO_OUTPUT = '/home/matteo/Desktop/w3af'
+                PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
+                PATH_TO_OUTPUT = '/home/matteo/Desktop'
                 HOME_DIRECTORY = '/home/matteo'
             }
             steps {
                 sh 'pwd'
-                sh '${PATH_TO_SCRIPT}/w3af/w3af_console -s ${PATH_TO_SCRIPT}/configurazione.w3af'
+                sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
                 sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:/${HOME_DIRECTORY}/'
                 sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:/${HOME_DIRECTORY}/'
                 sh 'scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:/${HOME_DIRECTORY}/'
