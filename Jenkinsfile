@@ -158,16 +158,17 @@ pipeline {
             }
             environment {
                 PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
-                PATH_TO_OUTPUT = '/home/matteo/Desktop'
+                PATH_TO_OUTPUT = '/home/matteo/Desktop/w3af/scripts'
                 HOME_DIRECTORY = '/home/matteo'
             }
             steps {
                 sh 'pwd'
-                sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
+                //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
+                sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
                 sh '''
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:/${HOME_DIRECTORY}/ || \
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:/${HOME_DIRECTORY}/ || \
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:/${HOME_DIRECTORY}/
+                    scp -r ${PATH_TO_OUTPUT}/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                    scp -r ${PATH_TO_OUTPUT}/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                    scp -r ${PATH_TO_OUTPUT}/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
                     '''
             }
         }
