@@ -10,14 +10,14 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-    // //ok
-    //     stage ('Build') {
-    //         steps {
-    //             sh 'pwd'
-    //             //fa npm install e include anche postinstall che richiama build
-    //             sh 'npm install --package-lock'
-    //         }
-    //     }
+    //ok
+        stage ('Build') {
+            steps {
+                sh 'pwd'
+                //fa npm install e include anche postinstall che richiama build
+                sh 'npm install --package-lock'
+            }
+        }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -140,14 +140,18 @@ pipeline {
     //         }
     //     }
 
-        
+        stage('DAST - start app'){
+            steps{
+                sh 'npm start'
+            }
+        }
         // stage('DAST - ZAP full scan'){
         //     steps{
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/zap-full-scan.sh'
         //     }
         // }
 
-        stage ('Run W3AF for DAST') {
+        stage ('DAST - W3AF ') {
             agent {
                 label 'w3af'
             }
