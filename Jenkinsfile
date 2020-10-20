@@ -140,18 +140,22 @@ pipeline {
     //         }
     //     }
 
+    //ok
         stage('DAST - start app'){
             steps{
                 sh 'pwd'
                 sh 'npm start &'
             }
         }
+
+    //ok
         // stage('DAST - ZAP full scan'){
         //     steps{
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/zap-full-scan.sh'
         //     }
         // }
 
+    //ok
         stage ('DAST - W3AF ') {
             agent {
                 label 'w3af'
@@ -179,7 +183,7 @@ pipeline {
                 
             }
         }
-
+    //ok
         stage ('Copy Report to Jenkins Home') {
             environment {
                 HOME_DIRECTORY = '/home/matteo'
