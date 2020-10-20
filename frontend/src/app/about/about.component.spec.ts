@@ -14,11 +14,13 @@ xdescribe('AboutComponent', () => { // FIXME https://github.com/dockleryxk/ng-si
   let component: AboutComponent
   let fixture: ComponentFixture<AboutComponent>
 
-  beforeEach(async(() => {TestBed.configureTestingModule({imports: [
-HttpClientTestingModule,
-  SlideshowModule,
-    MatCardModule
-  ],
+  beforeEach(async(() => {
+    TestBed.configureTestingModule(
+      {imports: [
+        HttpClientTestingModule,
+        SlideshowModule,
+        MatCardModule
+      ],
     declarations: [ AboutComponent ]
   })
       .compileComponents()
