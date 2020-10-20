@@ -82,7 +82,12 @@ pipeline {
     //ok
         stage('standard-code and angular-linting'){
                 steps{
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+                    sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/ &&\
+                        npx standard --fix \
+                        cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend && \
+                        npx ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report && \
+                        cd ..'
+                // sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
             }
         }
 
@@ -215,12 +220,12 @@ pipeline {
         // }
 
 
-        stage('e2e'){
-            steps{
-                sh 'spm run preprotractor'
-                sh 'npm run protractor'
-            }
-        }
+        // stage('e2e'){
+        //     steps{
+        //         sh 'spm run preprotractor'
+        //         sh 'npm run protractor'
+        //     }
+        // }
         // stage ('e2e test') {
         //         // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
         //     steps {

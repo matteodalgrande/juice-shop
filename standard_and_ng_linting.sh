@@ -3,6 +3,7 @@
 # //Standard fix formatta automaticamente il codice in un formato standard
 # //il linting in angular controlla la qualita' del codice angular nel progetto
 
+cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/
 npx standard --fix
 cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend 
 npx ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report 
