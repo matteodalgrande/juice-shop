@@ -88,11 +88,8 @@ pipeline {
     //     }
 
     stage ('Lint Analysis with Jshint') {
-        environment {
-                PATH_TO_SCRIPT = '${JENKINS_HOME}/workspace/juice-shop-pipeline'
-            }
         steps {
-            sh '${PATH_TO_SCRIPT}/jshint-script.sh'
+            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
         }
     }
 
