@@ -15,8 +15,8 @@ xdescribe('AboutComponent', () => { // FIXME https://github.com/dockleryxk/ng-si
   let fixture: ComponentFixture<AboutComponent>
 
   beforeEach(async(() => {TestBed.configureTestingModule({imports: [
-    HttpClientTestingModule,
-    SlideshowModule,
+HttpClientTestingModule,
+  SlideshowModule,
     MatCardModule
   ],
     declarations: [ AboutComponent ]
