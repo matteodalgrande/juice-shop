@@ -172,8 +172,8 @@ pipeline {
                     sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
                     '''
                 sh '''
-                    ${PATH_TO_OUTPUT}/w3af/output-w3af.json \
-                    ${PATH_TO_OUTPUT}/w3af/output-w3af.html \
+                    ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
+                    ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
                     ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
                     '''
                 
