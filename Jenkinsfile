@@ -83,7 +83,7 @@ pipeline {
         stage('standard-code and angular-linting'){
                 steps{
                     sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/ &&\
-                        npx standard --fix \
+                        npx standard --fix &&\
                         cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend && \
                         npx ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report && \
                         cd ..'
