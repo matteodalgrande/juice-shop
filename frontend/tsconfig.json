@@ -9,9 +9,9 @@
   "compilerOptions": {
     "allowJs": true,
     "experimentalDecorators": true,
-    "strict": true,
+    // "strict": true,
     //"strict-type-predicates": false,
-   // "strictNullChecks": true
+   "strictNullChecks": true
   },
   "references": [
     {
