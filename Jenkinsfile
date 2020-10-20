@@ -10,14 +10,14 @@ pipeline {
                 sh 'echo "Starting the build"'
             }
         }
-    //ok
-        stage ('Build') {
-            steps {
-                sh 'pwd'
-                //fa npm install e include anche postinstall che richiama build
-                sh 'npm install --package-lock'
-            }
-        }
+    // //ok
+    //     stage ('Build') {
+    //         steps {
+    //             sh 'pwd'
+    //             //fa npm install e include anche postinstall che richiama build
+    //             sh 'npm install --package-lock'
+    //         }
+    //     }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
