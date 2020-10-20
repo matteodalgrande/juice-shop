@@ -11,13 +11,13 @@ pipeline {
             }
         }
     //ok
-        stage ('Build') {
-            steps {
-                sh 'pwd'
-                //fa npm install e include anche postinstall che richiama build
-                sh 'npm install --package-lock'
-            }
-        }
+        // stage ('Build') {
+        //     steps {
+        //         sh 'pwd'
+        //         //fa npm install e include anche postinstall che richiama build
+        //         sh 'npm install --package-lock'
+        //     }
+        // }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -160,23 +160,17 @@ pipeline {
                 PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
                 PATH_TO_OUTPUT = '/home/matteo/Desktop'
                 HOME_DIRECTORY = '/home/matteo'
-                SSH_PASSPHRASE = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
+                SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
             }
             steps {
                 sh 'pwd'
                 //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
                 sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
-                sshagent(credentials : ['695f6cae-4a22-4f72-b6d4-e1f61510d3f7']) {
-
-                    //Connect to hostip/s with ssh, run scripts, go wild!
-                    sh 'ssh -o StrictHostKeyChecking=no matteo@192.168.128.110 uptime'
-                    sh '''
-                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
-                        '''
-                }
-
+                sh '''
+                    ssh pass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                    ssh pass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                    ssh pass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
+                    '''
             }
         }
 
