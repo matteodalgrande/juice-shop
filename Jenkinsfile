@@ -11,13 +11,13 @@ pipeline {
             }
         }
     // //ok
-        stage ('Build') {
-            steps {
-                sh 'pwd'
-                //fa npm install e include anche postinstall che richiama build
-                sh 'npm install --package-lock'
-            }
-        }
+        // stage ('Build') {
+        //     steps {
+        //         sh 'pwd'
+        //         //fa npm install e include anche postinstall che richiama build
+        //         sh 'npm install --package-lock'
+        //     }
+        // }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -94,11 +94,11 @@ pipeline {
     //     }
     // }
     //
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-        }
-    }
+    // stage ('Lint Analysis with Jshint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+    //     }
+    // }
 
     stage ('Generating Software Bill of Materials') {
         steps {
