@@ -166,11 +166,17 @@ pipeline {
                 sh 'pwd'
                 //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
                 sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
-                sh '''
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                    scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
-                    '''
+                sshagent(credentials : ['695f6cae-4a22-4f72-b6d4-e1f61510d3f7']) {
+
+                    //Connect to hostip/s with ssh, run scripts, go wild!
+                    sh 'ssh -o StrictHostKeyChecking=no matteo@192.168.128.110 uptime'
+                    sh '''
+                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+                        scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
+                        '''
+                }
+
             }
         }
 
