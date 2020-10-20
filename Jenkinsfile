@@ -88,11 +88,11 @@ pipeline {
     //     }
 
     // //ok
-    // stage ('Lint Analysis with Jshint') {
-    //     steps {
-    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
-    //     }
-    // }
+    stage ('Lint Analysis with Jshint') {
+        steps {
+            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
+        }
+    }
     
     stage ('Lint Analysis with Jshint') {
         steps {
