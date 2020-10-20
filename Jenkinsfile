@@ -94,11 +94,11 @@ pipeline {
         }
     }
     
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-        }
-    }
+    // stage ('Lint Analysis with Jshint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+    //     }
+    // }
 
 
     //  //ok
