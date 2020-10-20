@@ -195,9 +195,9 @@ pipeline {
                     cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
                     '''
                 sh '''
-                    rm ${HOME_DIRECTORY}/w3af-report.json || \
-                    rm ${HOME_DIRECTORY}/w3af-report.html || \
-                    rm ${HOME_DIRECTORY}/w3af-report.txt
+                    rm ${HOME_DIRECTORY}/output-w3af.json || \
+                    rm ${HOME_DIRECTORY}/output-w3af.html || \
+                    rm ${HOME_DIRECTORY}/output-w3af.txt
                     '''
             }
         }
