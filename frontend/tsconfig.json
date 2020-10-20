@@ -7,11 +7,11 @@
 {
   "files": [],
   "compilerOptions": {
+    "strictNullChecks": true,
     "allowJs": true,
     "experimentalDecorators": true,
     // "strict": true,
     //"strict-type-predicates": false,
-   "strictNullChecks": true
   },
   "references": [
     {
