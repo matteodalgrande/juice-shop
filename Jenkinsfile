@@ -82,8 +82,9 @@ pipeline {
     //ok
         stage('standard-code and angular-linting'){
                 steps{
+                    sh 'pwd'
                     sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/ &&\
-                        npx standard --fix &&\
+                        npx standard --fix --strictNullChecks &&\
                         cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend && \
                         npx ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report && \
                         cd ..'
@@ -167,6 +168,7 @@ pipeline {
         // stage('DAST - ZAP full scan'){
         //     steps{
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/zap-full-scan.sh'
+        // // se il report e' in .json allora usa il prettyPrint.py
         //     }
         // }
 
@@ -244,58 +246,6 @@ pipeline {
         //         sh 'node app"'
         //     }
         // }
-        // stage('ZAP scanner'){
-        //     steps{
-        //         sh 'mkdir /zap/wrk/'
-        //         sh ''
-        //     }
-        // }
-
-// dast:
-//     stage: dast
-//     variables:
-//         DAST_FULL_SCAN_ENABLED: "true"
-//         website: "https://gitlab-nodejs-staging.herokuapp.com"
-//     script:
-//         - mkdir /zap/wrk/
-//         - pwd
-//         - whoami
-//         - /zap/zap-baseline.py -g gl-dast-report.json -t $website
-//         - if [ -e "/zap/wrk/gl-dast-report.json" ]; then cp "/zap/wrk/gl-dast-report.json" .; else mkdir "/zap/wrk/" && touch "/zap/wrk/gl-dast-report.json" && cp "/zap/wrk/gl-dast-report.json" .; fi
-//         - cp /zap/wrk/gl-dast-report.json .
-//         - wget https://raw.githubusercontent.com/matteodalgrande/read-write-json-file-python/master/read-write-json-file.py
-//         - chmod 777 read-write-json-file.py
-//         - apt-get install python3
-//         - python3 ./read-write-json-file.py
-//     artifacts:
-//         paths:
-//             - gl-dast-report.json
-//         when: always
-
-// dast2:
-//     stage: dast2
-// #    image: owasp/zap2docker-weekly
-//     image: registry.gitlab.com/gitlab-org/security-products/zaproxy
-//     variables:
-//         website: "https://gitlab-nodejs-staging.herokuapp.com"
-//     script:
-//         - mkdir /zap/wrk/
-//         - pwd
-//         - whoami
-//         - /zap/zap-baseline.py -g gl-dast-report.json -t $website
-//         - if [ -e "/zap/wrk/gl-dast-report.json" ]; then cp "/zap/wrk/gl-dast-report.json" .; else mkdir "/zap/wrk/" && touch "/zap/wrk/gl-dast-report.json" && cp "/zap/wrk/gl-dast-report.json" .; fi
-//         - cp /zap/wrk/gl-dast-report.json .
-//         - wget https://raw.githubusercontent.com/matteodalgrande/read-write-json-file-python/master/read-write-json-file.py
-//         - chmod 777 read-write-json-file.py
-//         - apt-get install python3
-//         - python3 ./read-write-json-file.py
-//     artifacts:
-//         paths:
-//             - gl-dast-report.json
-//         when: always
-
-
-
 
 
         // stage ('Deploy to App Server') {
