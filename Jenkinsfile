@@ -84,9 +84,9 @@ pipeline {
                 steps{
                     sh 'pwd'
                     sh 'cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/ &&\
-                        npx standard --fix &&\
+                        npm standard --fix &&\
                         cd ${JENKINS_HOME}/workspace/juice-shop-pipeline/frontend && \
-                        npx ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report && \
+                        npm ng lint --format=json > ${JENKINS_HOME}/reports/ng-lint-report && \
                         cd ..'
                 // sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
             }
