@@ -172,9 +172,9 @@ pipeline {
                     sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/
                     '''
                 sh '''
-                    ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
-                    ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
-                    ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
+                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
+                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
+                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
                     '''
                 
             }
@@ -191,9 +191,9 @@ pipeline {
                     cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
                     '''
                 sh '''
-                    rm ${JENKINS_HOME}/reports/w3af-report.json || \
-                    rm ${JENKINS_HOME}/reports/w3af-report.html || \
-                    rm ${JENKINS_HOME}/reports/w3af-report.txt
+                    rm ${JENKHOME_DIRECTORYINS_HOME}/reports/w3af-report.json || \
+                    rm ${HOME_DIRECTORY}/reports/w3af-report.html || \
+                    rm ${JENHOME_DIRECTORYKINS_HOME}/reports/w3af-report.txt
                     '''
             }
         }
