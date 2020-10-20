@@ -159,7 +159,7 @@ pipeline {
             environment {
                 PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
                 PATH_TO_OUTPUT = '/home/matteo/Desktop'
-                HOME_DIRECTORY = '/home/matteo/Desktop'
+                HOME_DIRECTORY = '/home/matteo/'
                 SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
             }
             steps {
