@@ -159,7 +159,7 @@ pipeline {
             environment {
                 PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
                 PATH_TO_OUTPUT = '/home/matteo/Desktop'
-                HOME_DIRECTORY = '/home/matteo/'
+                HOME_DIRECTORY = '/home/matteo'
                 SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
             }
             steps {
@@ -191,9 +191,9 @@ pipeline {
                     cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
                     '''
                 sh '''
-                    rm ${JENKHOME_DIRECTORYINS_HOME}/reports/w3af-report.json || \
-                    rm ${HOME_DIRECTORY}/reports/w3af-report.html || \
-                    rm ${JENHOME_DIRECTORYKINS_HOME}/reports/w3af-report.txt
+                    rm ${HOME_DIRECTORY}/w3af-report.json || \
+                    rm ${HOME_DIRECTORY}/w3af-report.html || \
+                    rm ${HOME_DIRECTORY}/w3af-report.txt
                     '''
             }
         }
