@@ -22,14 +22,12 @@ const robots = require('express-robots-txt')
 const yaml = require('js-yaml')
 const swaggerUi = require('swagger-ui-express')
 const RateLimit = require('express-rate-limit')
+
+
+
+
 const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yml', 'utf8'))
-const {
-  ensureFileIsPassed,
-  handleZipFileUpload,
-  checkUploadSize,
-  checkFileType,
-  handleXmlUpload
-} = require('./routes/fileUpload')
+const {  ensureFileIsPassed,  handleZipFileUpload,  checkUploadSize,  checkFileType,  handleXmlUpload} = require('./routes/fileUpload')
 const profileImageFileUpload = require('./routes/profileImageFileUpload')
 const profileImageUrlUpload = require('./routes/profileImageUrlUpload')
 const redirect = require('./routes/redirect')

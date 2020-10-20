@@ -20,7 +20,7 @@ exports.config = {
   directConnect: true,
 
   allScriptsTimeout: 80000,
-  chromeDriver:'/var/lib/jenkins/chromedriver',
+  chromeDriver: '/var/lib/jenkins/chromedriver',
   specs: [
     'test/e2e/*.js'
   ],
