@@ -79,7 +79,7 @@ pipeline {
     //         }
     //     }
 
-    //ok
+    //ok   
         stage('standard-code and angular-linting'){
                 steps{
                     sh 'pwd'
