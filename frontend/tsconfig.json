@@ -10,7 +10,7 @@
     "allowJs": true,
     "experimentalDecorators": true,
     // "strict": true,
-    "strict-type-predicates": true
+    "strict-type-predicates": false
   },
   "references": [
     {
