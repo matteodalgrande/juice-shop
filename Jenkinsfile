@@ -100,6 +100,13 @@ pipeline {
         }
     }
 
+    stage ('Generating Software Bill of Materials') {
+        steps {
+            //Building the dependencies to generate SBoM
+            sh 'npm install'
+            sh 'cyclonedx-bom -o ${JENKINS_HOME}/reports/sbom.xml'
+        }
+    }
 
     //  //ok
     //     stage('pre Code Climate'){
