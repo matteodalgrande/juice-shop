@@ -14,10 +14,7 @@ xdescribe('AboutComponent', () => { // FIXME https://github.com/dockleryxk/ng-si
   let component: AboutComponent
   let fixture: ComponentFixture<AboutComponent>
 
-  beforeEach(async(() => {
-
-    TestBed.configureTestingModule({
-      imports: [
+  beforeEach(async(() => {TestBed.configureTestingModule({imports: [
         HttpClientTestingModule,
         SlideshowModule,
         MatCardModule
