@@ -85,6 +85,16 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
         //     }
         // }
+
+    stage ('Lint Analysis with Jshint') {
+        environment {
+                PATH_TO_SCRIPT = '${JENKINS_HOME}/workspace/juice-shop-pipeline'
+            }
+        steps {
+            sh '${PATH_TO_SCRIPT}/jshint-script.sh'
+        }
+    }
+
     //  //ok
     //     stage('pre Code Climate'){
     //         steps{
@@ -140,13 +150,13 @@ pipeline {
     //         }
     //     }
 
-    //ok
-        stage('DAST - start app'){
-            steps{
-                sh 'pwd'
-                sh 'npm start &'
-            }
-        }
+    // //ok
+    //     stage('DAST - start app'){
+    //         steps{
+    //             sh 'pwd'
+    //             sh 'npm start &'
+    //         }
+    //     }
 
     //ok
         // stage('DAST - ZAP full scan'){
@@ -155,54 +165,62 @@ pipeline {
         //     }
         // }
 
-    //ok
-        stage ('DAST - W3AF ') {
-            agent {
-                label 'w3af'
-            }
-            environment {
-                PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
-                PATH_TO_OUTPUT = '/home/matteo/Desktop'
-                HOME_DIRECTORY = '/home/matteo'
-                SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
-            }
-            steps {
-                sh 'pwd'
-                //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
-                sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
-                sh '''
-                    sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                    sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
-                    sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/ 
-                    '''
-                sh '''
-                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
-                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
-                    rm ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
-                    '''
+    // //ok
+    //     stage ('DAST - W3AF ') {
+    //         agent {
+    //             label 'w3af'
+    //         }
+    //         environment {
+    //             PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
+    //             PATH_TO_OUTPUT = '/home/matteo/Desktop'
+    //             HOME_DIRECTORY = '/home/matteo'
+    //             SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
+    //         }
+    //         steps {
+    //             sh 'pwd'
+    //             //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
+    //             sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
+    //             sh '''
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/ 
+    //                 '''
+    //             sh '''
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
+    //                 '''
                 
-            }
-        }
-    //ok
-        stage ('Copy Report to Jenkins Home') {
-            environment {
-                HOME_DIRECTORY = '/home/matteo'
-            }
-            steps {
-                sh '''
-                    cp ${HOME_DIRECTORY}/output-w3af.json ${JENKINS_HOME}/reports/w3af-report.json || \
-                    cp ${HOME_DIRECTORY}/output-w3af.html ${JENKINS_HOME}/reports/w3af-report.html || \
-                    cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
-                    '''
-            }
-        }
+    //         }
+    //     }
+    // //ok
+        // stage ('Copy Report to Jenkins Home') {
+        //     environment {
+        //         HOME_DIRECTORY = '/home/matteo'
+        //     }
+        //     steps {
+        //         sh '''
+        //             cp ${HOME_DIRECTORY}/output-w3af.json ${JENKINS_HOME}/reports/w3af-report.json || \
+        //             cp ${HOME_DIRECTORY}/output-w3af.html ${JENKINS_HOME}/reports/w3af-report.html || \
+        //             cp ${HOME_DIRECTORY}/output-w3af.txt ${JENKINS_HOME}/reports/w3af-report.txt
+        //             '''
+        //         //qua non posso eliminare il file almeno che non assegno a jenkins sudo group
 
-        // stage('e2e'){
-        //     steps{
-        //         sh 'spm run preprotractor'
-        //         sh 'npm run protractor'
+        //         // sh '''
+        //         //     rm ${HOME_DIRECTORY}/output-w3af.json || \
+        //         //     rm ${HOME_DIRECTORY}/output-w3af.html || \
+        //         //     rm ${HOME_DIRECTORY}/output-w3af.txt
+        //         //     '''
         //     }
         // }
+
+
+        stage('e2e'){
+            steps{
+                sh 'spm run preprotractor'
+                sh 'npm run protractor'
+            }
+        }
         // stage ('e2e test') {
         //         // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
         //     steps {
