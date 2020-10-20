@@ -79,21 +79,21 @@ pipeline {
     //         }
     //     }
 
-    // //ok
-        // stage('standard-code and angular-linting'){
-        //         steps{
-        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-        //     }
-        // }
-
-    stage ('Lint Analysis with Jshint') {
-        environment {
-                PATH_TO_SCRIPT = '${JENKINS_HOME}/workspace/juice-shop-pipeline'
+    //ok
+        stage('standard-code and angular-linting'){
+                steps{
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
             }
-        steps {
-            sh '${PATH_TO_SCRIPT}/jshint-script.sh'
         }
-    }
+
+    // stage ('Lint Analysis with Jshint') {
+    //     environment {
+    //             PATH_TO_SCRIPT = '${JENKINS_HOME}/workspace/juice-shop-pipeline'
+    //         }
+    //     steps {
+    //         sh '${PATH_TO_SCRIPT}/jshint-script.sh'
+    //     }
+    // }
 
     //  //ok
     //     stage('pre Code Climate'){
