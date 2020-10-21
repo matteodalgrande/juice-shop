@@ -270,7 +270,7 @@ pipeline {
  
     stage('prova'){
         steps{
-            sh 'echo prova > /var/lib/jenkins/reports/prova.txt'
+            sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
         }
     }
 //NON COMPLETO devi mettere i report 
