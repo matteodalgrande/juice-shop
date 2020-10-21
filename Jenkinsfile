@@ -267,19 +267,19 @@ pipeline {
         //     }
         // }
  
-     stage('prova'){
-        steps{
-            sh 'echo "prova" > /var/lib/jenkins/reports/prova2.txt'
-                        sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
+        stage('prova'){
+            steps{
+                sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
+                sh 'echo "prova" > /var/lib/jenkins/reports/prova2.txt'
+            }
         }
-    }
- 
+    
     }
  
 //NON COMPLETO devi mettere i report 
     post{
         always{
-            copyArtifacts filter: '/var/lib/jenkins/reports/*.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: lastSuccessful()
+            archiveArtifacts artifacts: '*.txt', followSymlinks: false
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
     //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
