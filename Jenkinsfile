@@ -97,8 +97,7 @@ pipeline {
 
     stage ('Lint Analysis with Jshint') {
         steps {
-            sh 'eslint --no-color --format json --ext .js --output-file ${JENKINS_HOME}/reports/eslint-report-server ./'
-            //sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
         }
     }
 
