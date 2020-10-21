@@ -270,7 +270,7 @@ pipeline {
         stage('prova'){
             steps{
                 sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
-                sh 'echo "prova2" > /var/lib/jenkins/reports/prova2.txt'
+                sh 'echo "prova2" > /var/lib/jenkins/reports/provino.txt'
             }
         }
     
@@ -279,7 +279,7 @@ pipeline {
 //NON COMPLETO devi mettere i report 
     post{
         always{
-            archiveArtifacts artifacts: 'prova2.txt', followSymlinks: false
+            archiveArtifacts artifacts: 'provino.txt', followSymlinks: false
             archiveArtifacts artifacts: 'prova.txt', followSymlinks: false
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
