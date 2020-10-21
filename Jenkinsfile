@@ -266,13 +266,15 @@ pipeline {
         //         sh 'ssh -o StrictHostKeyChecking=no chaos@10.0.2.20 "source ./env.sh && ./env.sh && cd dvna && pm2 start server.js"'
         //     }
         // }
-    }
  
-    stage('prova'){
+     stage('prova'){
         steps{
             sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
         }
     }
+ 
+    }
+ 
 //NON COMPLETO devi mettere i report 
     post{
         always{
