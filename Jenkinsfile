@@ -269,7 +269,7 @@ pipeline {
  
      stage('prova'){
         steps{
-            sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
+            sh 'echo "prova" > /var/lib/jenkins/reports/prova2.txt'
         }
     }
  
@@ -278,7 +278,7 @@ pipeline {
 //NON COMPLETO devi mettere i report 
     post{
         always{
-            archiveArtifacts artifacts:'prova.txt'
+            copyArtifacts fingerprintArtifacts: true, parameters: '*', projectName: 'juice-shop-pipeline', selector: lastSuccessful(), target: '/var/lib/jenkins/reports/'
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
     //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
