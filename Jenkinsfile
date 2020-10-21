@@ -270,7 +270,7 @@ pipeline {
         stage('prova'){
             steps{
                 sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
-                sh 'echo "prova" > /var/lib/jenkins/reports/prova2.txt'
+                sh 'echo "prova2" > /var/lib/jenkins/reports/prova2.txt'
             }
         }
     
