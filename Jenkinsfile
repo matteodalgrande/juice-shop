@@ -272,7 +272,8 @@ pipeline {
                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
                 sh 'pwd'
                 sh 'echo "prova2" > provino.txt'
-                archiveArtifacts artifacts: 'provino.txt', fingerprint: true
+                sh 'echo "prova" > prova.txt'
+                archiveArtifacts artifacts: 'provino.txt,prova.txt', fingerprint: true
             }
         }
     
