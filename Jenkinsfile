@@ -262,20 +262,20 @@ pipeline {
                 HEROKU_API_KEY = credentials('06f06453-161e-439e-99ef-8624f6251086')
             }
             steps {
-                sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY}'
+                sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY} --cleanup'
             }
         }
         
- //ok
-        stage('prova'){
-            steps{
-                // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
-                sh 'pwd'
-                sh 'echo "prova2" >provino.txt'
-                sh 'echo "prova" > prova.txt'
-                archiveArtifacts artifacts: 'provino.txt,prova.txt', fingerprint: true
-            }
-        }
+//  //ok
+//         stage('prova'){
+//             steps{
+//                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
+//                 sh 'pwd'
+//                 sh 'echo "prova2" >provino.txt'
+//                 sh 'echo "prova" > prova.txt'
+//                 archiveArtifacts artifacts: 'provino.txt,prova.txt', fingerprint: true
+//             }
+//         }
     
     }
  
