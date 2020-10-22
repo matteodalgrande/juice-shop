@@ -272,6 +272,7 @@ pipeline {
                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
                 sh 'pwd'
                 sh 'echo "prova2" > provino.txt'
+                archiveArtifacts artifacts: 'provino.txt', fingerprint: true
             }
         }
     
@@ -281,7 +282,7 @@ pipeline {
     post{
         always{
             // archiveArtifacts artifacts: 'provino.txt', followSymlinks: false
-          copyArtifacts filter: 'target/provino.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: lastSuccessful()
+          copyArtifacts filter: 'provino.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: lastSuccessful()
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
     //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
