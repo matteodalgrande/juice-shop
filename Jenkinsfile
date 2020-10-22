@@ -279,7 +279,7 @@ pipeline {
 //NON COMPLETO devi mettere i report 
     post{
         always{
-            copyArtifacts filter: 'provino.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: lastSuccessful()
+            copyArtifacts filter: 'provino.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: workspace()
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
     //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
