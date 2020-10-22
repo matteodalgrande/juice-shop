@@ -257,36 +257,36 @@ pipeline {
         // }
 
 
-        // stage ('Deploy to App Server') {
-        //     steps {
-        //         sh 'echo "Deploying App to Server"'
-        //         sh 'ssh -o StrictHostKeyChecking=no chaos@10.0.2.20 "cd dvna && pm2 stop server.js"'
-        //         sh 'ssh -o StrictHostKeyChecking=no chaos@10.0.2.20 "rm -rf dvna/ && mkdir dvna"'
-        //         sh 'scp -r * chaos@10.0.2.20:~/dvna'
-        //         sh 'ssh -o StrictHostKeyChecking=no chaos@10.0.2.20 "source ./env.sh && ./env.sh && cd dvna && pm2 start server.js"'
-        //     }
-        // }
- 
-        stage('prova'){
-            steps{
-                // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
-                sh 'pwd'
-                sh 'echo "prova2" > provino.txt'
-                sh 'echo "prova" > prova.txt'
-                archiveArtifacts artifacts: 'provino.txt,prova.txt', fingerprint: true
+        stage ('Deploy to Heroku') {
+            environment {
+                HEROKU_API_KEY = credentials('06f06453-161e-439e-99ef-8624f6251086')
+            }
+            steps {
+                sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY}'
             }
         }
+        
+ //ok
+//         stage('prova'){
+//             steps{
+//                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
+//                 sh 'pwd'
+//                 sh 'echo "prova2" >provino.txt'
+//                 sh 'echo "prova" > prova.txt'
+//                 archiveArtifacts artifacts: 'provino.txt,prova.txt', fingerprint: true
+//         }
+//             }
     
     }
  
-//NON COMPLETO devi mettere i report 
-    post{
-        always{
-            // archiveArtifacts artifacts: 'provino.txt', followSymlinks: false
-          copyArtifacts filter: 'provino.txt,prova.txt', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
-        }
-    // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
-    //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
-    }
+// //ok
+//     post{
+//         always{
+//             // archiveArtifacts artifacts: 'provino.txt', followSymlinks: false
+//           copyArtifacts filter: 'provino.txt,prova.txt', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
+//         }
+//     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
+//     //https://medium.com/@gustavo.guss/jenkins-archive-artifact-save-file-in-pipeline-ac6d8b569c2c
+//     }
 
 }
