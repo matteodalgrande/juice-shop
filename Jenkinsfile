@@ -280,6 +280,7 @@ pipeline {
 //NON COMPLETO devi mettere i report 
     post{
         always{
+            archiveArtifacts artifacts: 'provino.txt', followSymlinks: false
             copyArtifacts filter: 'provino.txt', fingerprintArtifacts: true, projectName: 'juice-shop-pipeline', selector: workspace()
         }
     // //https://www.jenkins.io/doc/book/pipeline/syntax/#post
