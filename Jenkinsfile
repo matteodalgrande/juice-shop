@@ -163,7 +163,31 @@ pipeline {
               
     //             sh 'rm cc-test-reporter && rm frontend/cc-test-reporter'
     //         }
-    //     }
+    //     }agent {
+    //             label 'w3af'
+    //         }
+    //         environment {
+    //             PATH_TO_SCRIPT = '/home/matteo/Desktop/w3af'
+    //             PATH_TO_OUTPUT = '/home/matteo/Desktop'
+    //             HOME_DIRECTORY = '/home/matteo'
+    //             SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
+    //         }
+    //         steps {
+    //             sh 'pwd'
+    //             //sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/configurazione.w3af'
+    //             sh '${PATH_TO_SCRIPT}/w3af_console -s ${PATH_TO_SCRIPT}/scripts/xss_simple.w3af'
+    //             sh '''
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.json matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.html matteo@192.168.128.110:${HOME_DIRECTORY}/ || \
+    //                 sshpass -p ${SSH_PASSWORD} scp -r ${PATH_TO_OUTPUT}/w3af/output-w3af.txt matteo@192.168.128.110:${HOME_DIRECTORY}/ 
+    //                 '''
+    //             sh '''
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.json || \
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.html || \
+    //                 rm ${PATH_TO_OUTPUT}/w3af/output-w3af.txt
+    //                 '''
+                
+    //         }
 
     // //ok
     //     stage('DAST - start app'){
@@ -256,8 +280,25 @@ pipeline {
         //     }
         // }
 
+        stage ('Deploy to VM App Server') {
+            environment {
+                SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
+            }
+            steps {
+                sh 'echo "Deploying App to VM app Server"'
+                //-o option
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "cd juice-shop && pkill -15 node"'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo @192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
+                sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "cd juie-shop && npm install && npm start"'
+            }
+        }
+
 //devi fare la differenza tra la production in locale e creare i due brach master e stagin
-        // stage ('Deploy to Heroku') {
+        // stage ('Deploy to Heroku App Server - Production') {
+            // when{
+            //     branch 'master'
+            // }
         //     environment {
         //         HEROKU_API_KEY = credentials('06f06453-161e-439e-99ef-8624f6251086')
         //     }
@@ -265,15 +306,21 @@ pipeline {
         //         sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY} --cleanup'
         //     }
         // }
-        
-        stage('Package - Grunt'){
-            steps{
-                sh 'pwd'
-                sh 'npm prune --production && npm dedupe'
-                sh 'cd frontend && npm prune --production && npm dedupe'
-                sh 'grunt package'
-            }
-        }
+
+
+//ok
+        // stage('Package - Grunt'){
+        //     when{
+        //         branch 'master'
+        //     }
+        //     steps{
+        //         sh 'pwd'
+        //         sh 'npm prune --production && npm dedupe'
+        //         sh 'cd frontend && npm prune --production && npm dedupe'
+        //         sh 'grunt package'
+        //         //qua posso caricare i file all'interno di dist/ dove voglio nel web
+        //     }
+        // }
              
         // stage('Package - Docker'){
         //     steps{
@@ -281,7 +328,7 @@ pipeline {
         //     }
         // }  
 
-//  //ok DA AGGIUSTARE TUTTI GLI
+//  //ok DA AGGIUSTARE TUTTI I REPORT
 //         stage('prova'){
 //             steps{
 //                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
