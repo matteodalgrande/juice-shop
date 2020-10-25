@@ -256,17 +256,32 @@ pipeline {
         //     }
         // }
 
-
-        stage ('Deploy to Heroku') {
-            environment {
-                HEROKU_API_KEY = credentials('06f06453-161e-439e-99ef-8624f6251086')
-            }
-            steps {
-                sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY} --cleanup'
+//devi fare la differenza tra la production in locale e creare i due brach master e stagin
+        // stage ('Deploy to Heroku') {
+        //     environment {
+        //         HEROKU_API_KEY = credentials('06f06453-161e-439e-99ef-8624f6251086')
+        //     }
+        //     steps {
+        //         sh 'dpl --provider=heroku --app=${HEROKU_APP_PRODUCTION} --api-key=${HEROKU_API_KEY} --cleanup'
+        //     }
+        // }
+        
+        stage('Package - Grunt'){
+            steps{
+                sh 'pwd'
+                sh 'npm prune --production && npm dedupe'
+                sh 'cd frontend && npm prune --production && npm dedupe'
+                sh 'grunt package'
             }
         }
-        
-//  //ok
+             
+        // stage('Package - Docker'){
+        //     steps{
+        //         sh ''
+        //     }
+        // }  
+
+//  //ok DA AGGIUSTARE TUTTI GLI
 //         stage('prova'){
 //             steps{
 //                 // sh 'echo "prova" > /var/lib/jenkins/reports/prova.txt'
