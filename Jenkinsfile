@@ -280,20 +280,24 @@ pipeline {
         //     }
         // }
 
-        stage ('Deploy to VM App Server') {
-            environment {
-                SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
-            }
-            steps {
-                sh 'echo "Deploying App to VM app Server"'
-                //-o option
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "pkill -15 node"'
-                // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
-                // sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
-                // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "source /etc/profile; cd juice-shop && npm install && npm start"'
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm install; npm start > /dev/null 2>&1 &"'
-            }
-        }
+//ok
+        // stage ('Deploy to VM App Server') {
+            // when{
+            //     branch 'staging'
+            // }
+        //     environment {
+        //         SSH_PASSWORD = credentials('695f6cae-4a22-4f72-b6d4-e1f61510d3f7')
+        //     }
+        //     steps {
+        //         sh 'echo "Deploying App to VM app Server"'
+        //         //-o option
+        //         sh 'rm -r node_module && cd frontend && rm -r node_module'
+        //         sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "pkill -15 node"'
+        //         sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
+        //         sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
+        //         sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm install; npm start > /dev/null 2>&1 &"'
+        //     }
+        // }
 
 //devi fare la differenza tra la production in locale e creare i due brach master e stagin
         // stage ('Deploy to Heroku App Server - Production') {
