@@ -292,7 +292,7 @@ pipeline {
                 // sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
                 // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "source /etc/profile; cd juice-shop && npm install && npm start"'
 //                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm install && npm start &"'
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm start &"'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm start&"'
             }
         }
 
