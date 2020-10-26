@@ -287,10 +287,10 @@ pipeline {
             steps {
                 sh 'echo "Deploying App to VM app Server"'
                 //-o option
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "mkdir /home/matteo/Desktop/ciao"'
                 //sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "cd juice-shop && pkill -15 node"'
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
-                sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
+                // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
+                // sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 pwd'
                 sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "cd juie-shop && npm install && npm start"'
             }
         }
