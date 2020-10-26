@@ -287,12 +287,11 @@ pipeline {
             steps {
                 sh 'echo "Deploying App to VM app Server"'
                 //-o option
-                // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "pkill -15 node"'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "pkill -15 node"'
                 // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "rm -rf juice-shop/ && mkdir juice-shop"'
                 // sh 'sshpass -p ${SSH_PASSWORD} scp -r * matteo@192.168.128.112:~/juice-shop'
                 // sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 "source /etc/profile; cd juice-shop && npm install && npm start"'
-//                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm install && npm start &"'
-                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop; npm start &"'
+                sh 'sshpass -p ${SSH_PASSWORD} ssh -o StrictHostKeyChecking=no matteo@192.168.128.112 ". ~/.nvm/nvm.sh && . ~/.profile && . ~/.bashrc && cd juice-shop && npm install; npm start > /dev/null 2>&1 &"'
             }
         }
 
