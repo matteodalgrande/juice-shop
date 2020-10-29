@@ -11,13 +11,13 @@ pipeline {
             }
         }
     // //ok
-        stage ('Build') {
-            steps {
-                sh 'pwd'
-                //fa npm install e include anche postinstall che richiama build
-                sh 'npm install --package-lock'
-            }
-        }
+        // stage ('Build') {
+        //     steps {
+        //         sh 'pwd'
+        //         //fa npm install e include anche postinstall che richiama build
+        //         sh 'npm install --package-lock'
+        //     }
+        // }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -31,11 +31,11 @@ pipeline {
     //         }
     //     }
     // //ok
-        stage ('NPM Audit Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-            }
-        }
+        // stage ('NPM Audit Analysis') {
+        //     steps {
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+        //     }
+        // }
     // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
         stage ('NodeJsScan Analysis') {
             steps {
