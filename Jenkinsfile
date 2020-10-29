@@ -80,12 +80,12 @@ pipeline {
     //     }
 
     // //ok   
-        stage('standard-code and angular-linting'){
-                steps{
-                    sh 'pwd'
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-            }
-        }
+        // stage('standard-code and angular-linting'){
+        //         steps{
+        //             sh 'pwd'
+        //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+        //     }
+        // }
 
     // // //ok
     stage ('Lint Analysis with Jshint') {
