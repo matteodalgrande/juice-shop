@@ -52,63 +52,63 @@ pipeline {
     //         }
     //     }
         
-    // //ok
-        stage ('Dependency-Check Analysis') {
-            steps{
-        //        sh 'npm i --package-lock'
-                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
-                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
-            }
-        }
-
-    // //ok
-        stage ('Audit.js Analysis') {
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-            }
-        }
-
-    // //ok
-        stage ('Snyk Analysis') {
-             environment {
-                SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
-            }
-            steps {
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
-                
-            }
-        }
-
-    // //ok   
-    //     stage('standard-code and angular-linting'){
-    //             steps{
-    //                 sh 'pwd'
-    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+    // // //ok
+    //     stage ('Dependency-Check Analysis') {
+    //         steps{
+    //     //        sh 'npm i --package-lock'
+    //             sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
+    //             sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
     //         }
     //     }
 
     // // //ok
-    // stage ('Lint Analysis with Jshint') {
-    //     steps {
-    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
+    //     stage ('Audit.js Analysis') {
+    //         steps {
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+    //         }
     //     }
-    // }
+
+    // // //ok
+    //     stage ('Snyk Analysis') {
+    //          environment {
+    //             SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
+    //         }
+    //         steps {
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
+                
+    //         }
+    //     }
+
+    // //ok   
+        stage('standard-code and angular-linting'){
+                steps{
+                    sh 'pwd'
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+            }
+        }
+
+    // // //ok
+    stage ('Lint Analysis with Jshint') {
+        steps {
+            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
+        }
+    }
     
     // ok
-    // stage ('Lint Analysis with Jshint') {
-    //     steps {
-    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-    //     }
-    // }
+    stage ('Lint Analysis with Jshint') {
+        steps {
+            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+        }
+    }
 
     // //ok
-    // stage ('Generating Software Bill of Materials') {
-    //     steps {
-    //         //Building the dependencies to generate SBoM
-    //         sh 'npm install'
-    //         sh 'cyclonedx-bom -o ${JENKINS_HOME}/reports/sbom.xml'
-    //     }
-    // }
+    stage ('Generating Software Bill of Materials') {
+        steps {
+            //Building the dependencies to generate SBoM
+            sh 'npm install'
+            sh 'cyclonedx-bom -o ${JENKINS_HOME}/reports/sbom.xml'
+        }
+    }
 
     //  //ok
     //     stage('pre Code Climate'){
