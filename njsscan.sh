@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ##questo e' qui dentro perche' sh non suppporta source perche' e' un integrazione di bash
 rm -r ${JENKINS_HOME}/venv || true
 virtualenv ${JENKINS_HOME}/venv -p python3

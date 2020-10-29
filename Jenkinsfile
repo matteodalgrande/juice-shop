@@ -11,13 +11,13 @@ pipeline {
             }
         }
     // //ok
-        // stage ('Build') {
-        //     steps {
-        //         sh 'pwd'
-        //         //fa npm install e include anche postinstall che richiama build
-        //         sh 'npm install --package-lock'
-        //     }
-        // }
+        stage ('Build') {
+            steps {
+                sh 'pwd'
+                //fa npm install e include anche postinstall che richiama build
+                sh 'npm install --package-lock'
+            }
+        }
     // // ok
     //     stage ('SonarQube Analysis') {
     //         environment {
@@ -31,53 +31,53 @@ pipeline {
     //         }
     //     }
     // //ok
-    //     stage ('NPM Audit Analysis') {
-    //         steps {
-    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-    //         }
-    //     }
+        stage ('NPM Audit Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+            }
+        }
     // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-    //     stage ('NodeJsScan Analysis') {
-    //         steps {
-    //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-    //         }
-    //     }
+        stage ('NodeJsScan Analysis') {
+            steps {
+                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+            }
+        }
     // //ok    prettyPrint json
-    //     stage ('Retire.js Analysis') {
-    //         steps {
-    //             sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-    //             sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-    //             sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-                // sh 'rm prettyPrint-json-file-python.py'
-    //         }
-    //     }
+        stage ('Retire.js Analysis') {
+            steps {
+                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+                sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+                sh 'rm prettyPrint-json-file-python.py'
+            }
+        }
         
     // //ok
-        // stage ('Dependency-Check Analysis') {
-        //     steps{
-        // //        sh 'npm i --package-lock'
-        //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
-        //         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
-        //     }
-        // }
+        stage ('Dependency-Check Analysis') {
+            steps{
+        //        sh 'npm i --package-lock'
+                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
+                sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
+            }
+        }
 
     // //ok
-    //     stage ('Audit.js Analysis') {
-    //         steps {
-    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-    //         }
-    //     }
+        stage ('Audit.js Analysis') {
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+            }
+        }
 
     // //ok
-    //     stage ('Snyk Analysis') {
-    //          environment {
-    //             SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
-    //         }
-    //         steps {
-    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
+        stage ('Snyk Analysis') {
+             environment {
+                SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
+            }
+            steps {
+                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
                 
-    //         }
-    //     }
+            }
+        }
 
     // //ok   
     //     stage('standard-code and angular-linting'){
@@ -123,13 +123,13 @@ pipeline {
     //         }
     //     }
     // // //ok
-    //     stage('Unit Test'){
-    //         steps{
-    //             sh 'pwd'
-    //             sh 'cd frontend && ng test --watch=false --source-map=true'
-    //             sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
-    //         }
-    //     }
+        // stage('Unit Test'){
+        //     steps{
+        //         sh 'pwd'
+        //         sh 'cd frontend && ng test --watch=false --source-map=true'
+        //         sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+        //     }
+        // }
 
     //  //ok
     //     stage('Integration Test'){
@@ -257,7 +257,6 @@ pipeline {
 
         // stage('e2e'){
         //     steps{
-        //         sh 'spm run preprotractor'
         //         sh 'npm run protractor'
         //     }
         // }
@@ -299,7 +298,7 @@ pipeline {
         //     }
         // }
 
-//devi fare la differenza tra la production in locale e creare i due brach master e stagin
+//ok
         // stage ('Deploy to Heroku App Server - Production') {
             // when{
             //     branch 'master'
@@ -313,25 +312,25 @@ pipeline {
         // }
 
 
-//ok
-        // stage('Package - Grunt'){
-        //     when{
-        //         branch 'master'
-        //     }
-        //     steps{
-        //         sh 'pwd'
-        //         sh 'npm prune --production && npm dedupe'
-        //         sh 'cd frontend && npm prune --production && npm dedupe'
-        //         sh 'grunt package'
-        //         //qua posso caricare i file all'interno di dist/ dove voglio nel web
-        //     }
-        // }
+// //ok
+//         stage('Package - Grunt'){
+//             when{
+//                 branch 'master'
+//             }
+//             steps{
+//                 sh 'pwd'
+//                 sh 'npm prune --production && npm dedupe'
+//                 sh 'cd frontend && npm prune --production && npm dedupe'
+//                 sh 'grunt package'
+//                 //qua posso caricare i file all'interno di dist/ dove voglio nel web
+//             }
+//         }
              
-        // stage('Package - Docker'){
-        //     steps{
-        //         sh ''
-        //     }
-        // }  
+//         stage('Package - Docker'){
+//             steps{
+//                 sh ''
+//             }
+//         }  
 
 //  //ok DA AGGIUSTARE TUTTI I REPORT
 //         stage('prova'){
