@@ -114,10 +114,11 @@ pipeline {
         stage('pre Code Climate'){
             steps{
                 sh 'pwd'
+                sh 'npm install'
                 sh 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
                 sh 'chmod 777  cc-test-reporter'
            //     sh 'npm install'
-                sh  'export NODE_ENV=test'
+                sh 'export NODE_ENV=test'
                 sh 'cp cc-test-reporter frontend/'
                 sh './cc-test-reporter --debug before-build'
             }
