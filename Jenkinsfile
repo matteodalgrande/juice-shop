@@ -36,21 +36,21 @@ pipeline {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
-    // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-        stage ('NodeJsScan Analysis') {
-            steps {
-                    sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-            }
-        }
-    // //ok    prettyPrint json
-        stage ('Retire.js Analysis') {
-            steps {
-                sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-                sh 'rm prettyPrint-json-file-python.py'
-            }
-        }
+    // // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
+    //     stage ('NodeJsScan Analysis') {
+    //         steps {
+    //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+    //         }
+    //     }
+    // // //ok    prettyPrint json
+    //     stage ('Retire.js Analysis') {
+    //         steps {
+    //             sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+    //             sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+    //             sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+    //             sh 'rm prettyPrint-json-file-python.py'
+    //         }
+    //     }
         
     // //ok
         stage ('Dependency-Check Analysis') {
