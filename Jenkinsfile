@@ -19,17 +19,17 @@ pipeline {
         //     }
         // }
     // // ok
-    //     stage ('SonarQube Analysis') {
-    //         environment {
-    //             scannerH1ome = tool 'SonarQubeScanner'
-    //         }
-    //         steps {
-    //             withSonarQubeEnv ('SonarQube') {
-    //                 sh '${scannerHome}/bin/sonar-scanner'
-    //                 sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-    //             }
-    //         }
-    //     }
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerH1ome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                }
+            }
+        }
     // //ok
         // stage ('NPM Audit Analysis') {
         //     steps {
@@ -110,62 +110,62 @@ pipeline {
     //     }
     // }
 
-     //ok
-        stage('pre Code Climate'){
-            steps{
-                sh 'pwd'
-                sh 'npm install'
-                sh 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
-                sh 'chmod 777  cc-test-reporter'
-           //     sh 'npm install'
-                sh 'export NODE_ENV=test'
-                sh 'cp cc-test-reporter frontend/'
-                sh './cc-test-reporter --debug before-build'
-            }
-        }
     // //ok
-        stage('Unit Test'){
-            steps{
-                sh 'pwd'
-                sh 'cd frontend && ng test --watch=false --source-map=true'
-                sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
-            }
-        }
+    //     stage('pre Code Climate'){
+    //         steps{
+    //             sh 'pwd'
+    //             sh 'npm install'
+    //             sh 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
+    //             sh 'chmod 777  cc-test-reporter'
+    //        //     sh 'npm install'
+    //             sh 'export NODE_ENV=test'
+    //             sh 'cp cc-test-reporter frontend/'
+    //             sh './cc-test-reporter --debug before-build'
+    //         }
+    //     }
+    // // //ok
+    //     stage('Unit Test'){
+    //         steps{
+    //             sh 'pwd'
+    //             sh 'cd frontend && ng test --watch=false --source-map=true'
+    //             sh 'nyc --report-dir=./build/reports/coverage/server-tests mocha test/server'
+    //         }
+    //     }
 
-     //ok
-        stage('Integration Test'){
-            steps {
-                //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
-                sh 'pwd'
-                sh 'rm chromedriver | true'
-                sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
-                sh 'unzip chromedriver_linux64.zip'
-                sh 'rm chromedriver_linux64.zip'
+    //  //ok
+    //     stage('Integration Test'){
+    //         steps {
+    //             //chromedriver 83 serve solo per gli e2e, perche' gli altri usano l'ultima versione di chrome 
+    //             sh 'pwd'
+    //             sh 'rm chromedriver | true'
+    //             sh 'wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip'
+    //             sh 'unzip chromedriver_linux64.zip'
+    //             sh 'rm chromedriver_linux64.zip'
 
-                sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
+    //             sh 'nyc --report-dir=./build/reports/coverage/api-tests ./node_modules/jest/bin/jest.js --silent --runInBand --forceExit'
 
-                sh 'rm chromedriver'
-            }
-        }
-    //ok
-        stage('Code Climate'){
-            environment {
-                CC_TEST_REPORTER_ID = credentials('b979eca6-f885-43d7-b055-6f4cb572fe07')
-            }
-            steps{
-                sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
-                sh 'export GIT_BRANCH=master'
+    //             sh 'rm chromedriver'
+    //         }
+    //     }
+    // //ok
+    //     stage('Code Climate'){
+    //         environment {
+    //             CC_TEST_REPORTER_ID = credentials('b979eca6-f885-43d7-b055-6f4cb572fe07')
+    //         }
+    //         steps{
+    //             sh 'export GIT_COMMIT_SHA=$(git log | grep -m1 -oE \'[^ ]+$\')'
+    //             sh 'export GIT_BRANCH=master'
 
-                sh 'cd frontend && ./cc-test-reporter --debug format-coverage -t lcov -o ../build/reports/coverage/codeclimate.frontend.json ../build/reports/coverage/frontend-tests/lcov.info'
-                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info'
-                sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info'
-                sh './cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3'
-                sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
+    //             sh 'cd frontend && ./cc-test-reporter --debug format-coverage -t lcov -o ../build/reports/coverage/codeclimate.frontend.json ../build/reports/coverage/frontend-tests/lcov.info'
+    //             sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.server.json build/reports/coverage/server-tests/lcov.info'
+    //             sh './cc-test-reporter --debug format-coverage -t lcov -o build/reports/coverage/codeclimate.api.json build/reports/coverage/api-tests/lcov.info'
+    //             sh './cc-test-reporter sum-coverage build/reports/coverage/codeclimate.*.json -p 3'
+    //             sh './cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}'
               
-                sh 'rm cc-test-reporter && rm frontend/cc-test-reporter'
-            }
+    //             sh 'rm cc-test-reporter && rm frontend/cc-test-reporter'
+    //         }
         
-        }
+    //     }
 
     // //ok
     //     stage('DAST - start app'){
