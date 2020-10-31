@@ -19,17 +19,17 @@ pipeline {
         //     }
         // }
     // // ok
-        // stage ('SonarQube Analysis') {
-        //     environment {
-        //         scannerHome = tool 'SonarQubeScanner'
-        //     }
-        //     steps {
-        //         withSonarQubeEnv ('SonarQube') {
-        //             sh '${scannerHome}/bin/sonar-scanner'
-        //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-        //         }
-        //     }
-        // }
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                }
+            }
+        }
     // //ok
         // stage ('NPM Audit Analysis') {
         //     steps {
@@ -306,7 +306,7 @@ pipeline {
              
         stage('Package - Docker'){
             environment {
-                DOCKER_HUB_PASSWORD = credentials('55ee03f5-0e0d-444d-bb52-ad3aa90c9636')
+                DOCKER_HUB_PASSWORD = credentials('c02bbe7d-da12-43b8-8f69-cb34a7e1626a')
             }
             steps{
                 sh 'docker build -t matteodalgrande/juiceshopdevsecops:12.0.3 .'
