@@ -309,9 +309,9 @@ pipeline {
                 DOCKER_HUB_PASSWORD = credentials('55ee03f5-0e0d-444d-bb52-ad3aa90c9636')
             }
             steps{
-                sh 'docker build -t matteodalgrande/juiceshopdevsecops:12.0.2 .'
+                sh 'docker build -t matteodalgrande/juiceshopdevsecops:12.0.1 .'
                 sh 'docker login --username=matteodalgrande --password=${DOCKER_HUB_PASSWORD}'
-                sh 'docker push matteodalgrande/juiceshopdevsecops:12.0.2'
+                sh 'docker push matteodalgrande/juiceshopdevsecops:12.0.1'
             }
         }  
 
