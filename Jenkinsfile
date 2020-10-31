@@ -79,27 +79,27 @@ pipeline {
     //         }
     //     }
 
-    //ok   
-        stage('standard-code and angular-linting'){
-                steps{
-                    sh 'pwd'
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-            }
-        }
+    // //ok   
+    //     stage('standard-code and angular-linting'){
+    //             steps{
+    //                 sh 'pwd'
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+    //         }
+    //     }
 
-    // //ok
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
-        }
-    }
+    // // //ok
+    // stage ('Lint Analysis with Jshint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
+    //     }
+    // }
     
-    // ok
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-        }
-    }
+    // // ok
+    // stage ('Lint Analysis with Jshint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+    //     }
+    // }
 
     // //ok
     // stage ('Generating Software Bill of Materials') {
@@ -304,16 +304,16 @@ pipeline {
 //             }
 //         }
              
-        // stage('Package - Docker'){
-        //     environment {
-        //         DOCKER_HUB_PASSWORD = credentials('55ee03f5-0e0d-444d-bb52-ad3aa90c9636')
-        //     }
-        //     steps{
-        //         sh 'docker build -t matteodalgrande/juiceshopdevsecops:12.0.3 .'
-        //         sh 'docker login --username=matteodalgrande --password=${DOCKER_HUB_PASSWORD}'
-        //         sh 'docker push matteodalgrande/juiceshopdevsecops:12.0.3'
-        //     }
-        // }  
+        stage('Package - Docker'){
+            environment {
+                DOCKER_HUB_PASSWORD = credentials('55ee03f5-0e0d-444d-bb52-ad3aa90c9636')
+            }
+            steps{
+                sh 'docker build -t matteodalgrande/juiceshopdevsecops:12.0.3 .'
+                sh 'docker login --username=matteodalgrande --password=${DOCKER_HUB_PASSWORD}'
+                sh 'docker push matteodalgrande/juiceshopdevsecops:12.0.3'
+            }
+        }  
 
 //  //ok DA AGGIUSTARE TUTTI I REPORT
 //         stage('prova'){
