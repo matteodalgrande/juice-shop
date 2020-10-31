@@ -19,17 +19,17 @@ pipeline {
         //     }
         // }
     // // ok
-        // stage ('SonarQube Analysis') {
-        //     environment {
-        //         scannerHome = tool 'SonarQubeScanner'
-        //     }
-        //     steps {
-        //         withSonarQubeEnv ('SonarQube') {
-        //             sh '${scannerHome}/bin/sonar-scanner'
-        //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-        //         }
-        //     }
-        // }
+        stage ('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {
+                withSonarQubeEnv ('SonarQube') {
+                    sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                }
+            }
+        }
     // //ok
         // stage ('NPM Audit Analysis') {
         //     steps {
