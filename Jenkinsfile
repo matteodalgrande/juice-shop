@@ -108,7 +108,7 @@ pipeline {
     //         //sh 'npm install'
     //         sh 'cyclonedx-bom -o ${JENKINS_HOME}/reports/sbom.xml'
     //     }
-    }
+    //}
 
     // //ok
     //     stage('Coverage Test - pre Code Climate'){
