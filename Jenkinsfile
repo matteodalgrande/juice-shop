@@ -245,7 +245,7 @@ pipeline {
                 //preprotractor
                 sh 'npm dedupe && node ./node_modules/protractor/bin/webdriver-manager update --gecko false'
                 //protractor
-                sh 'Xvfb :0 -ac -screen 0 1024x768x24 &'
+                sh 'Xvfb :1 -ac -screen 0 1024x768x24 &'
                 sh 'npm run e2e'
                 // //e2e test
                 // sh 'node test/e2eTests.js'
