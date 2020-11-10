@@ -19,7 +19,7 @@ pipeline {
         //     }
         // }
     // // ok
-        // stage ('SonarQube Analysis') {
+        // stage ('SAST - SonarQube Analysis') {
         //     environment {
         //         scannerHome = tool 'SonarQubeScanner'
         //     }
@@ -31,19 +31,19 @@ pipeline {
         //     }
         // }
     // //ok
-        // stage ('NPM Audit Analysis') {
+        // stage ('SAST - NPM Audit Analysis') {
         //     steps {
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
         //     }
         // }
     // // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-    //     stage ('NodeJsScan Analysis') {
+    //     stage ('SAST - NodeJsScan Analysis') {
     //         steps {
     //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
     //         }
     //     }
     // // //ok    prettyPrint json
-    //     stage ('Retire.js Analysis') {
+    //     stage ('SAST - Retire.js Analysis') {
     //         steps {
     //             sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
     //             sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
@@ -53,7 +53,7 @@ pipeline {
     //     }
         
     // // //ok
-    //     stage ('Dependency-Check Analysis') {
+    //     stage ('SAST - Dependency-Check Analysis') {
     //         steps{
     //     //        sh 'npm i --package-lock'
     //             sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
@@ -62,14 +62,14 @@ pipeline {
     //     }
 
     // // //ok
-    //     stage ('Audit.js Analysis') {
+    //     stage ('SAST - Audit.js Analysis') {
     //         steps {
     //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
     //         }
     //     }
 
     // // //ok
-    //     stage ('Snyk Analysis') {
+    //     stage ('SAST - Snyk Analysis') {
     //          environment {
     //             SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
     //         }
@@ -79,27 +79,27 @@ pipeline {
     //         }
     //     }
 
-    //ok   
-        stage('standard-code and angular-linting'){
-             steps{
-                sh 'pwd'
-                sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-            }
-        }
+    // //ok   
+    //     stage('standard-code and angular-linting'){
+    //          steps{
+    //             sh 'pwd'
+    //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+    //         }
+    //     }
 
-    // //ok
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
-        }
-    }
+    // // //ok
+    // stage ('LINT - JShint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
+    //     }
+    // }
     
-    // ok
-    stage ('Lint Analysis with Jshint') {
-        steps {
-            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-        }
-    }
+    // // ok
+    // stage ('LINT -ESlint') {
+    //     steps {
+    //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+    //     }
+    // }
 
     // //ok
     // stage ('Generating Software Bill of Materials') {
@@ -108,10 +108,10 @@ pipeline {
     //         //sh 'npm install'
     //         sh 'cyclonedx-bom -o ${JENKINS_HOME}/reports/sbom.xml'
     //     }
-    // }
+    }
 
     // //ok
-    //     stage('pre Code Climate'){
+    //     stage('Coverage Test - pre Code Climate'){
     //         steps{
     //             sh 'pwd'
     //             sh 'npm install'
@@ -148,7 +148,7 @@ pipeline {
     //         }
     //     }
     // //ok
-    //     stage('Code Climate'){
+    //     stage('Coverage Test - Code Climate'){
     //         environment {
     //             CC_TEST_REPORTER_ID = credentials('b979eca6-f885-43d7-b055-6f4cb572fe07')
     //         }
@@ -167,17 +167,18 @@ pipeline {
         
     //     }
 
-    // //ok
-    //     stage('DAST - start app'){
-    //         steps{
-    //             sh 'pwd'
-    //             sh 'npm start &'
-    //         }
-    //     }
+    // // //ok
+    // //     stage('DAST - start app'){
+    // //         steps{
+    // //             sh 'pwd'
+    // //             
+    // //         }
+    // //     }
 
     //ok
         // stage('DAST - ZAP full scan'){
         //     steps{
+        //         sh 'npm start &'
         //         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/zap-full-scan.sh'
         // // se il report e' in .json allora usa il prettyPrint.py
         //     }
@@ -212,7 +213,7 @@ pipeline {
     //         }
     //     }
     // //ok
-        // stage ('Copy Report to Jenkins Home') {
+        // stage ('DAST - Copy Report to Jenkins Home') {
         //     environment {
         //         HOME_DIRECTORY = '/home/matteo'
         //     }
@@ -233,24 +234,23 @@ pipeline {
         // }
 
 
-        // stage('e2e'){
-        //     steps{
-        //         sh 'npm run protractor'
-        //     }
-        // }
-        // stage ('e2e test') {
-        //         // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
-        //     steps {
-        //         //preprotractor
-        //         sh 'npm dedupe && node ./node_modules/protractor/bin/webdriver-manager update --gecko false'
-        //         //protractor
-        //         sh 'npm run e2e'
-        //         //e2e test
-        //         sh 'node test/e2eTests.js'
-        //         //vagrant 
-        //         sh 'cd vagrant && vagrant up'
-        //     }
-        // }
+        // // stage('TEST e2e'){
+        // //     steps{
+        // //         sh 'npm run protractor'
+        // //     }
+        // // }
+        stage ('e2e test') {
+                // e2e test--> protractor.conf.js aggiungere nell'array exports.config la linea chromeDriver:'./chromedriver', e scricare il driver chrome 83 e inserirlo nella main directory;    -->        commentare le linee dalla 88 alla 104 in test/e2e/complianSpec.js sennò il server non risponde più",
+            steps {
+                //preprotractor
+                sh 'npm dedupe && node ./node_modules/protractor/bin/webdriver-manager update --gecko false'
+                //protractor
+                sh 'npm run e2e'
+                // //e2e test
+                // sh 'node test/e2eTests.js'
+            }
+        }
+
         // stage ('Start App') {
         //     steps {
         //         sh 'node app"'
@@ -303,7 +303,8 @@ pipeline {
 //                 //qua posso caricare i file all'interno di dist/ dove voglio nel web
 //             }
 //         }
-             
+
+   //ok          
         // stage('Package - Docker'){
         //     environment {
         //         DOCKER_HUB_PASSWORD = credentials('55ee03f5-0e0d-444d-bb52-ad3aa90c9636')

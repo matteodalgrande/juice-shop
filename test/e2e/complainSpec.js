@@ -85,23 +85,23 @@ describe('/#/complain', () => {
       })
     })
 
-    describe('challenge "xxeDos"', () => {
-      it('should be possible to trigger request timeout via .xml upload with Quadratic Blowup attack', () => {
-        complaintMessage.sendKeys('XXE Quadratic Blowup!')
-        file.sendKeys(path.resolve('test/files/xxeQuadraticBlowup.xml'))
-        submitButton.click()
-      })
+    // describe('challenge "xxeDos"', () => {
+    //   it('should be possible to trigger request timeout via .xml upload with Quadratic Blowup attack', () => {
+    //     complaintMessage.sendKeys('XXE Quadratic Blowup!')
+    //     file.sendKeys(path.resolve('test/files/xxeQuadraticBlowup.xml'))
+    //     submitButton.click()
+    //   })
 
-      it('should be possible to trigger request timeout via .xml upload with dev/random attack', () => {
-        complaintMessage.sendKeys('XXE Quadratic Blowup!')
-        file.sendKeys(path.resolve('test/files/xxeDevRandom.xml'))
-        submitButton.click()
-      })
+    //   it('should be possible to trigger request timeout via .xml upload with dev/random attack', () => {
+    //     complaintMessage.sendKeys('XXE Quadratic Blowup!')
+    //     file.sendKeys(path.resolve('test/files/xxeDevRandom.xml'))
+    //     submitButton.click()
+    //   })
 
-      afterAll(() => {
-        protractor.expect.challengeSolved({ challenge: 'XXE DoS' })
-      })
-    })
+    //   afterAll(() => {
+    //     protractor.expect.challengeSolved({ challenge: 'XXE DoS' })
+    //   })
+    // })
 
     describe('challenge "arbitraryFileWrite"', () => {
       it('should be possible to upload zip file with filenames having path traversal', () => {
