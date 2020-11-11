@@ -39,71 +39,71 @@ pipeline {
         //     }
         // }
 
-        // // ok
+        // ok
         // stage('SAST'){
         //     parallel {
-        //         //ok
-        //         stage ('SonarQube Analysis') {
-        //             environment {
-        //                 scannerHome = tool 'SonarQubeScanner'
-        //             }
-        //             steps {
-        //                 withSonarQubeEnv ('SonarQube') {
-        //                     sh '${scannerHome}/bin/sonar-scanner'
-        //                     sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-        //                 }
-        //             }
-        //         }
-        //         //ok
-        //         stage ('NPM Audit Analysis') {
-        //             steps {
-        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-        //             }
-        //         }
-        //         // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-        //         stage ('NodeJsScan Analysis') {
-        //             steps {
-        //                     sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-        //             }
-        //         }
-
-                // // //ok    prettyPrint json
-                // stage ('Retire.js Analysis') {
+                // //ok
+                // stage ('SonarQube Analysis') {
+                //     environment {
+                //         scannerHome = tool 'SonarQubeScanner'
+                //     }
                 //     steps {
-                //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                //         sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                //         sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-                //         sh 'rm prettyPrint-json-file-python.py'
+                //         withSonarQubeEnv ('SonarQube') {
+                //             sh '${scannerHome}/bin/sonar-scanner'
+                //             sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+                //         }
                 //     }
                 // }
+                //ok
+                stage ('NPM Audit Analysis') {
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+                    }
+                }
+                // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
+                stage ('NodeJsScan Analysis') {
+                    steps {
+                            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+                    }
+                }
+
+                // //ok    prettyPrint json
+                stage ('Retire.js Analysis') {
+                    steps {
+                        sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                        sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+                        sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+                        sh 'rm prettyPrint-json-file-python.py'
+                    }
+                }
 
                 
-        //         // //ok
-        //         stage ('Dependency-Check Analysis') {
-        //             steps{
-        //             //        sh 'npm i --package-lock'
-        //                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
-        //                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
-        //             }
-        //         }
+                // //ok
+                stage ('Dependency-Check Analysis') {
+                    steps{
+                    //        sh 'npm i --package-lock'
+                        sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
+                        sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
+                    }
+                }
 
-        //         // //ok
-        //         stage ('Audit.js Analysis') {
-        //             steps {
-        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-        //             }
-        //         }
+                // //ok
+                stage ('Audit.js Analysis') {
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+                    }
+                }
 
-        //         // //ok
-        //         stage ('Snyk Analysis') {
-        //             environment {
-        //                 SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
-        //             }
-        //             steps {
-        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
+                // //ok
+                stage ('Snyk Analysis') {
+                    environment {
+                        SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
+                    }
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
                         
-        //             }
-        //         }  
+                    }
+                }  
         //     }
         // } 
 
@@ -115,7 +115,7 @@ pipeline {
                         stage('Coverage Test - pre Code Climate'){
                             steps{
                                 sh 'pwd'
-                                sh 'npm install'
+                                //sh 'npm install'
                                 sh 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64  > ./cc-test-reporter'
                                 sh 'chmod 777  cc-test-reporter'
                                 //     sh 'npm install'
