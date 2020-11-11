@@ -28,7 +28,9 @@ pipeline {
                     }
                 }
                 stage('git-secrets'){
+                    steps{
                     sh 'echo "ciao"'
+                    }
                 }
             }
         }
@@ -131,14 +133,6 @@ pipeline {
   
                             }
                         }
-
-
-
-
-
-
-
-
 
         stage('DAST'){
             parallel{
