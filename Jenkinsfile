@@ -13,29 +13,29 @@ pipeline {
         //     }
         // }
 
-        // stage('LINTING and STANDARD'){
-        //     parallel{
-        //         //ok   
-        //             stage('standard-code and angular-linting'){
-        //                 steps{
-        //                     sh 'pwd'
-        //                     sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
-        //                 }
-        //             }
-        //         // //ok
+        stage('LINTING and STANDARD'){
+            parallel{
+                //ok   
+                    stage('standard-code and angular-linting'){
+                        steps{
+                            sh 'pwd'
+                            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/standard_and_ng_linting.sh'
+                        }
+                    }
+                // //ok
                 stage ('JShint') {
                     steps {
                         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/jshint-script.sh'
                     }
                 }
-        //         // ok
-        //         stage ('ESlint') {
-        //             steps {
-        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
-        //             }
-        //         }
-        //     }
-        // }
+                // ok
+                stage ('ESlint') {
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/eslint-script.sh'
+                    }
+                }
+            }
+        }
 
         // // ok
         stage('SAST'){
