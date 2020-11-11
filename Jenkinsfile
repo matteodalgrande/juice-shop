@@ -109,8 +109,8 @@ pipeline {
 
         stage('Test'){
             parallel {
-                stage('prova'){
-                    stages{
+                // stage('prova'){
+                //     stages{
                         //ok
                         stage('Coverage Test - pre Code Climate'){
                             steps{
@@ -177,8 +177,8 @@ pipeline {
                                 // sh 'node test/e2eTests.js'
                             }
                         }
-                    }
-                }
+                //     }
+                // }
 
             }
         }
