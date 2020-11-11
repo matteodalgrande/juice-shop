@@ -95,7 +95,7 @@ pipeline {
 
         stage('Test'){
             parallel {
-                stage('prova'){
+                stage('Test'){
                     stages{
                         stage('Coverage Test - pre Code Climate'){
                             steps{
