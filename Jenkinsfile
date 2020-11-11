@@ -95,8 +95,7 @@ pipeline {
             }
     }
 
-        stage('Test'){
-                    stages{
+
                         stage('Coverage Test - pre Code Climate'){
                             steps{
                                                 sh 'echo "ciao"'
@@ -134,8 +133,7 @@ pipeline {
 
 
 
-                    
-                }
+
 
         }
 
