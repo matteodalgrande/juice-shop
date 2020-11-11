@@ -5,15 +5,15 @@ pipeline {
 
     stages {
 
-        // //ok
-        stage ('Build') {
-            steps {
-                //fa npm install e include anche postinstall che richiama build
-             sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules frontend/package-lock.json || true'   
- //             sh 'npm install --package-lock'
-              sh 'npm install'
-            }
-        }
+//         // //ok
+//         stage ('Build') {
+//             steps {
+//                 //fa npm install e include anche postinstall che richiama build
+//              sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules frontend/package-lock.json || true'   
+//  //             sh 'npm install --package-lock'
+//               sh 'npm install'
+//             }
+//         }
 
         // stage('LINTING and STANDARD'){
         //     parallel{
@@ -107,8 +107,8 @@ pipeline {
         //     }
         // } 
 
-        stage('Test'){
-            parallel {
+        // stage('Test'){
+        //     parallel {
                 // stage('prova'){
                 //     stages{
                         //ok
@@ -180,8 +180,8 @@ pipeline {
                 //     }
                 // }
 
-            }
-        }
+        //     }
+        // }
 
         stage('DAST'){
             parallel{
