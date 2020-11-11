@@ -43,7 +43,7 @@ pipeline {
         // stage('SAST'){
         //     parallel {
                 // //ok
-                // stage ('SonarQube Analysis') {
+                // stage ('SAST - SonarQube Analysis') {
                 //     environment {
                 //         scannerHome = tool 'SonarQubeScanner'
                 //     }
@@ -55,20 +55,20 @@ pipeline {
                 //     }
                 // }
                 //ok
-                stage ('NPM Audit Analysis') {
+                stage ('SAST - NPM Audit Analysis') {
                     steps {
                         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
                     }
                 }
                 // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-                stage ('NodeJsScan Analysis') {
-                    steps {
-                            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-                    }
-                }
+                // stage ('SAST - NodeJsScan Analysis') {
+                //     steps {
+                //             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+                //     }
+                // }
 
                 // //ok    prettyPrint json
-                stage ('Retire.js Analysis') {
+                stage ('SAST - Retire.js Analysis') {
                     steps {
                         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
                         sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
@@ -79,7 +79,7 @@ pipeline {
 
                 
                 // //ok
-                stage ('Dependency-Check Analysis') {
+                stage ('SAST - Dependency-Check Analysis') {
                     steps{
                     //        sh 'npm i --package-lock'
                         sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
@@ -88,14 +88,14 @@ pipeline {
                 }
 
                 // //ok
-                stage ('Audit.js Analysis') {
+                stage ('SAST - Audit.js Analysis') {
                     steps {
                         sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
                     }
                 }
 
                 // //ok
-                stage ('Snyk Analysis') {
+                stage ('SAST - Snyk Analysis') {
                     environment {
                         SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
                     }
