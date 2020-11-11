@@ -38,8 +38,8 @@ pipeline {
         // }
 
         // // ok
-        stages('SAST'){
-          //  parallel {
+        stage('SAST'){
+            parallel {
                 //ok
                 stage ('SonarQube Analysis') {
                     environment {
@@ -64,13 +64,15 @@ pipeline {
                             sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
                     }
                 }
-                // //ok    prettyPrint json
-                stage ('Retire.js Analysis') {
-                    steps {
-                        sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                        sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                        sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-                        sh 'rm prettyPrint-json-file-python.py'
+                stages{
+                    // //ok    prettyPrint json
+                    stage ('Retire.js Analysis') {
+                        steps {
+                            sh 'retire --path ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                            sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+                            sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+                            sh 'rm prettyPrint-json-file-python.py'
+                        }
                     }
                 }
                 
@@ -100,7 +102,7 @@ pipeline {
                         
                     }
                 }  
-          //  }
+            }
         } 
 
         stage('Test'){
