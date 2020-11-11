@@ -80,7 +80,6 @@ pipeline {
                         
                     }
                     }
-                }
 
                 // //ok
                 stage ('SAST - Snyk Analysis') {
@@ -91,7 +90,7 @@ pipeline {
                     }
                 }  
             }
-         
+    }
 
         stage('Test'){
             parallel {
