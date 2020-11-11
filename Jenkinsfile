@@ -6,13 +6,13 @@ pipeline {
     stages {
 
         // //ok
-        stage ('Build') {
-            steps {
-                //fa npm install e include anche postinstall che richiama build
-              sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules  package-lock.json || true'   
-              sh 'npm install --package-lock'
-            }
-        }
+        // stage ('Build') {
+        //     steps {
+        //         //fa npm install e include anche postinstall che richiama build
+        //       sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules  package-lock.json || true'   
+        //       sh 'npm install --package-lock'
+        //     }
+        // }
 
         // stage('LINTING and STANDARD'){
         //     parallel{
@@ -66,15 +66,15 @@ pipeline {
         //             }
         //         }
 
-                // // //ok    prettyPrint json
-                // stage ('Retire.js Analysis') {
-                //     steps {
-                //         sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
-                //         sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
-                //         sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
-                //         sh 'rm prettyPrint-json-file-python.py'
-                //     }
-                // }
+                // //ok    prettyPrint json
+                stage ('Retire.js Analysis') {
+                    steps {
+                        sh 'retire --path `pwd` --outputformat json --outputpath ${JENKINS_HOME}/reports/retirejs-report --exitwith 0'
+                        sh 'wget https://raw.githubusercontent.com/matteodalgrande/prettyPrint-json-file-python/master/prettyPrint-json-file-python.py'
+                        sh 'python3 prettyPrint-json-file-python.py ${JENKINS_HOME}/reports/retirejs-report'
+                        sh 'rm prettyPrint-json-file-python.py'
+                    }
+                }
 
                 
         //         // //ok
