@@ -9,7 +9,7 @@ pipeline {
         stage ('Build') {
             steps {
                 //fa npm install e include anche postinstall che richiama build
-       //       sh 'rm -r node_modules && rm -r frontend/node_modules'   
+             sh 'rm -r node_modules  package-lock.json  && rm -r frontend/node_modules  package-lock.json '   
               sh 'npm install --package-lock'
             }
         }
