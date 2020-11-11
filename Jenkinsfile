@@ -38,32 +38,32 @@ pipeline {
         // }
 
         // // ok
-        stage('SAST'){
-            parallel {
-                //ok
-                stage ('SonarQube Analysis') {
-                    environment {
-                        scannerHome = tool 'SonarQubeScanner'
-                    }
-                    steps {
-                        withSonarQubeEnv ('SonarQube') {
-                            sh '${scannerHome}/bin/sonar-scanner'
-                            sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
-                        }
-                    }
-                }
-                //ok
-                stage ('NPM Audit Analysis') {
-                    steps {
-                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
-                    }
-                }
-                // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-                stage ('NodeJsScan Analysis') {
-                    steps {
-                            sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
-                    }
-                }
+        // stage('SAST'){
+        //     parallel {
+        //         //ok
+        //         stage ('SonarQube Analysis') {
+        //             environment {
+        //                 scannerHome = tool 'SonarQubeScanner'
+        //             }
+        //             steps {
+        //                 withSonarQubeEnv ('SonarQube') {
+        //                     sh '${scannerHome}/bin/sonar-scanner'
+        //                     sh 'cat .scannerwork/report-task.txt > ${JENKINS_HOME}/reports/sonarqube-report'
+        //                 }
+        //             }
+        //         }
+        //         //ok
+        //         stage ('NPM Audit Analysis') {
+        //             steps {
+        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+        //             }
+        //         }
+        //         // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
+        //         stage ('NodeJsScan Analysis') {
+        //             steps {
+        //                     sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/njsscan.sh'
+        //             }
+        //         }
 
                 // //ok    prettyPrint json
                 stage ('Retire.js Analysis') {
@@ -76,34 +76,34 @@ pipeline {
                 }
 
                 
-                // //ok
-                stage ('Dependency-Check Analysis') {
-                    steps{
-                    //        sh 'npm i --package-lock'
-                        sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
-                        sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
-                    }
-                }
+        //         // //ok
+        //         stage ('Dependency-Check Analysis') {
+        //             steps{
+        //             //        sh 'npm i --package-lock'
+        //                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format JSON --out ${JENKINS_HOME}/reports/dependency-check-reports --prettyPrint --disableAssembly'
+        //                 sh '${JENKINS_HOME}/dependency-check/bin/dependency-check.sh --scan ${JENKINS_HOME}/workspace/juice-shop-pipeline/ --format HTML --out ${JENKINS_HOME}/reports/dependency-check-reports --disableAssembly'
+        //             }
+        //         }
 
-                // //ok
-                stage ('Audit.js Analysis') {
-                    steps {
-                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
-                    }
-                }
+        //         // //ok
+        //         stage ('Audit.js Analysis') {
+        //             steps {
+        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+        //             }
+        //         }
 
-                // //ok
-                stage ('Snyk Analysis') {
-                    environment {
-                        SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
-                    }
-                    steps {
-                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
+        //         // //ok
+        //         stage ('Snyk Analysis') {
+        //             environment {
+        //                 SNYK_TOKEN = credentials('c444a2b3-f760-4725-a200-4e5cfe87f0ee')
+        //             }
+        //             steps {
+        //                 sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/snyk.sh $SNYK_TOKEN'
                         
-                    }
-                }  
-            }
-        } 
+        //             }
+        //         }  
+        //     }
+        // } 
 
         stage('Test'){
             parallel {
