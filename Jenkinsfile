@@ -95,7 +95,6 @@ pipeline {
     }
 
         stage('Test'){
-            parallel {
                     stages{
                         stage('Coverage Test - pre Code Climate'){
                             steps{
@@ -137,7 +136,6 @@ pipeline {
                     
                 }
 
-            }
         }
 
         stage('DAST'){
