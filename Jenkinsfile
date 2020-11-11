@@ -8,7 +8,7 @@ pipeline {
         // //ok
         stage ('Build') {
             steps {
-
+                sh 'echo "ciao"'
             }
         }
 
@@ -17,16 +17,19 @@ pipeline {
                 //ok   
                     stage('standard-code and angular-linting'){
                         steps{
+                                            sh 'echo "ciao"'
                         }
                     }
                 // //ok
                 stage ('JShint') {
+                                    sh 'echo "ciao"'
                     steps {
                     }
                 }
                 // okP
                 stage ('ESlint') {
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
             }
@@ -38,22 +41,26 @@ pipeline {
                 //ok
                 stage ('SAST - SonarQube Analysis') {
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
                 //ok
                 stage ('SAST - NPM Audit Analysis') {
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
                 // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
                 stage ('SAST - NodeJsScan Analysis') {
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
 
                 // //ok    prettyPrint json
                 stage ('SAST - Retire.js Analysis') {
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
 
@@ -61,6 +68,7 @@ pipeline {
                 // //ok
                 stage ('SAST - Dependency-Check Analysis') {
                     steps{
+                                        sh 'echo "ciao"'
                     }
                 }
 
@@ -68,6 +76,7 @@ pipeline {
                 stage ('SAST - Audit.js Analysis') {
 
                     steps {
+                                        sh 'echo "ciao"'
                         
                     }
                     }
@@ -77,6 +86,7 @@ pipeline {
                 stage ('SAST - Snyk Analysis') {
 
                     steps {
+                                        sh 'echo "ciao"'
                         
                     }
                 }  
@@ -89,27 +99,32 @@ pipeline {
                     stages{
                         stage('Coverage Test - pre Code Climate'){
                             steps{
+                                                sh 'echo "ciao"'
                  }
                         }
                         //ok
                         stage('Unit Test'){
                             steps{
+                                                sh 'echo "ciao"'
                             }
                         }
                          //ok
                         stage('Integration Test'){
                             steps {
+                                                sh 'echo "ciao"'
    
                             }
                         }
                         stage('Coverage Test - Code Climate'){
 
                             steps{
+                                                sh 'echo "ciao"'
 
                             }
                         }
                         stage ('e2e test') {
                              steps {
+                                                 sh 'echo "ciao"'
   
                             }
                         }
@@ -130,6 +145,7 @@ pipeline {
 
                 stage('ZAP full scan'){
                     steps{
+                                        sh 'echo "ciao"'
                     }
                 }
 
@@ -137,6 +153,7 @@ pipeline {
                 stage ('W3AF') {
                     
                     steps {
+                                        sh 'echo "ciao"'
 
                     }
                 }
@@ -146,6 +163,7 @@ pipeline {
                         HOME_DIRECTORY = '/home/matteo'
                     }
                     steps {
+                                        sh 'echo "ciao"'
 
                     }
                 }
@@ -166,6 +184,7 @@ pipeline {
                     }
 
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
                 stage ('Deploy to Heroku App Server - Production') {
@@ -173,6 +192,7 @@ pipeline {
                         branch 'master'
                     }
                     steps {
+                                        sh 'echo "ciao"'
                        }
                 }
             }
@@ -187,6 +207,7 @@ pipeline {
                         branch 'master'
                     }
                     steps{
+                                        sh 'echo "ciao"'
                      }
                 }
       
@@ -195,6 +216,7 @@ pipeline {
                         branch 'master'
                     }
                             steps{
+                                                sh 'echo "ciao"'
                      }
                 } 
             }
@@ -203,6 +225,7 @@ pipeline {
         stage('Send Report to Slack'){
         
                     steps{
+                                        sh 'echo "ciao"'
                     }
         
 
