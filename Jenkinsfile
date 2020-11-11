@@ -6,12 +6,13 @@ pipeline {
     stages {
 
         // //ok
-        // stage ('Build') {
-        //     steps {
-        //         //fa npm install e include anche postinstall che richiama build
-        //         sh 'npm install --package-lock'
-        //     }
-        // }
+        stage ('Build') {
+            steps {
+                //fa npm install e include anche postinstall che richiama build
+       //       sh 'rm -r node_modules && rm -r frontend/node_modules'   
+              sh 'npm install --package-lock'
+            }
+        }
 
         // stage('LINTING and STANDARD'){
         //     parallel{
