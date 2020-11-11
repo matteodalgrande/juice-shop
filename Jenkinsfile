@@ -48,26 +48,26 @@ pipeline {
         stage('SAST'){
             parallel {
                 //ok
-                stage ('SAST - SonarQube Analysis') {
+                stage ('SonarQube Analysis') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
                 //ok
-                stage ('SAST - NPM Audit Analysis') {
+                stage ('NPM Audit Analysis') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
                 // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-                stage ('SAST - NodeJsScan Analysis') {
+                stage ('NodeJsScan Analysis') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
 
                 // //ok    prettyPrint json
-                stage ('SAST - Retire.js Analysis') {
+                stage ('Retire.js Analysis') {
                     steps {
                                         sh 'echo "ciao"'
                     }
@@ -75,14 +75,14 @@ pipeline {
 
                 
                 // //ok
-                stage ('SAST - Dependency-Check Analysis') {
+                stage ('Dependency-Check Analysis') {
                     steps{
                                         sh 'echo "ciao"'
                     }
                 }
 
                 // //ok
-                stage ('SAST - Audit.js Analysis') {
+                stage ('Audit.js Analysis') {
 
                     steps {
                                         sh 'echo "ciao"'
@@ -91,7 +91,7 @@ pipeline {
                     }
 
                 // //ok
-                stage ('SAST - Snyk Analysis') {
+                stage ('Snyk Analysis') {
 
                     steps {
                                         sh 'echo "ciao"'
@@ -146,16 +146,6 @@ pipeline {
                 //ok
                 stage ('W3AF') {
                     
-                    steps {
-                                        sh 'echo "ciao"'
-
-                    }
-                }
-                //ok
-                stage ('Copy Report to Jenkins Home') {
-                    environment {
-                        HOME_DIRECTORY = '/home/matteo'
-                    }
                     steps {
                                         sh 'echo "ciao"'
 
