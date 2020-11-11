@@ -216,14 +216,14 @@ pipeline {
             }
         }
 
-        stage('Send Report to Slack'){
+        // stage('Send Report to Slack'){
         
-                    steps{
-                                        sh 'echo "ciao"'
-                    }
+        //             steps{
+        //                                 sh 'echo "ciao"'
+        //             }
         
 
-            }
+        //     }
         
 
     
