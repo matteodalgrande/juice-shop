@@ -8,8 +8,9 @@ pipeline {
         // //ok
         stage ('Build') {
             steps {
-                sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules frontend/package-lock.json || true'   
-                sh 'npm install --package-lock'
+                // sh 'rm -r node_modules  package-lock.json || true  && rm -r frontend/node_modules frontend/package-lock.json || true'   
+                // sh 'npm install --package-lock'
+                sh 'echo "ciao"'
             }
         }
 
