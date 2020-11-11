@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('LINTING and STANDARD'){
+        stage('LINTING - STANDARD - GIT SECRET'){
             parallel{
                 //ok   
                     stage('standard-code and angular-linting'){
@@ -34,6 +34,9 @@ pipeline {
                     steps {
                                         sh 'echo "ciao"'
                     }
+                }
+                stage('git-secrets'){
+                    sh 'echo "ciao"'
                 }
             }
         }
