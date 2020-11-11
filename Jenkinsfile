@@ -19,6 +19,21 @@ pipeline {
         //     }
         // }
     // // ok
+        stage('SAST'){
+            parallel {
+                stage ('SAST - NPM Audit Analysis') {
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/npm-audit.sh'
+                    }
+                }
+                stage ('SAST - Audit.js Analysis') {
+                    steps {
+                        sh '${JENKINS_HOME}/workspace/juice-shop-pipeline/auditjs.sh'
+                    }
+                }
+            }
+
+        }
         // stage ('SAST - SonarQube Analysis') {
         //     environment {
         //         scannerHome = tool 'SonarQubeScanner'
