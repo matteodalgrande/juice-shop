@@ -174,9 +174,21 @@ pipeline {
             }
         }
 
-        stage('Deploy'){
+        stage('Deploy and Delivery'){
             parallel{
+                stage('Package - Grunt'){
 
+                    steps{
+                                        sh 'echo "ciao"'
+                     }
+                }
+      
+                stage('Package - Docker'){
+
+                            steps{
+                                                sh 'echo "ciao"'
+                     }
+                } 
                 stage ('Deploy to VM App Server - Staging') {
                     when{
                         branch 'staging'
@@ -194,36 +206,7 @@ pipeline {
                 }
             }
         }
-         //ok
 
-
-        stage('Delivery'){
-            parallel{
-                stage('Package - Grunt'){
-
-                    steps{
-                                        sh 'echo "ciao"'
-                     }
-                }
-      
-                stage('Package - Docker'){
-
-                            steps{
-                                                sh 'echo "ciao"'
-                     }
-                } 
-            }
-        }
-
-        // stage('Send Report to Slack'){
-        
-        //             steps{
-        //                                 sh 'echo "ciao"'
-        //             }
-        
-
-        //     }
-        
 
     
     }
