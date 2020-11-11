@@ -188,9 +188,7 @@ pipeline {
                     }
                 }
                 stage ('Deploy to Heroku App Server - Production') {
-                    when{
-                        branch 'master'
-                    }
+
                     steps {
                                         sh 'echo "ciao"'
                        }
@@ -203,18 +201,14 @@ pipeline {
         stage('Delivery'){
             parallel{
                 stage('Package - Grunt'){
-                    when{
-                        branch 'master'
-                    }
+
                     steps{
                                         sh 'echo "ciao"'
                      }
                 }
       
                 stage('Package - Docker'){
-                    when{
-                        branch 'master'
-                    }
+
                             steps{
                                                 sh 'echo "ciao"'
                      }
