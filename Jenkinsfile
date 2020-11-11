@@ -171,7 +171,7 @@ pipeline {
         }
          stage ('Generating Software Bill of Materials') {
             steps {
-
+                sh 'echo "ciao"'
             }
         }
 
