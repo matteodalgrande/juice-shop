@@ -22,8 +22,9 @@ pipeline {
                     }
                 // //ok
                 stage ('JShint') {
-                                    sh 'echo "ciao"'
+                                   
                     steps {
+                                        sh 'echo "ciao"'
                     }
                 }
                 // okP
