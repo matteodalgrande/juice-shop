@@ -128,7 +128,7 @@ pipeline {
   
                             }
                         }
-                        stage ('Integration Test') {
+                        stage ('Smoke Test') {
                              steps {
                                                  sh 'echo "ciao"'
   
