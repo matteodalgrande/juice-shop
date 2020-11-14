@@ -291,10 +291,6 @@ pipeline {
                     }
                 }
             }
-        } post{
-            always{
-                
-         }
         }
          // //ok
         stage ('Generating Software Bill of Materials') {

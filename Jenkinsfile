@@ -168,7 +168,7 @@ pipeline {
             }
         }
 
-        stage('Release and Deploy'){
+        stage('Release'){
             parallel{
                 stage('Package - Grunt'){
 
@@ -183,6 +183,10 @@ pipeline {
                                                 sh 'echo "ciao"'
                      }
                 } 
+            }
+        }
+        stage('Deploy'){
+            parallel{
                 stage ('Deploy to VM App Server - Staging') {
                     when{
                         branch 'staging'
