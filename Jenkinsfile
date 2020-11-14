@@ -154,7 +154,7 @@ pipeline {
                 }
             }
                     post{
-            sh 'echo "ciao"'
+            echo ciao
         }
         } 
 
