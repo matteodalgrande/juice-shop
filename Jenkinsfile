@@ -152,14 +152,18 @@ pipeline {
                     }
                 }
             }
+        } post{
+            sh 'echo "ciao"'
         }
+
+
          stage ('Generating Software Bill of Materials') {
             steps {
                 sh 'echo "ciao"'
             }
         }
 
-        stage('Deploy and Delivery'){
+        stage('Release and Deploy'){
             parallel{
                 stage('Package - Grunt'){
 
