@@ -153,10 +153,12 @@ pipeline {
                     }
                 }
             }
-                    post{
-            echo ciao
-        }
         } 
+          stage('postDAST - Copy Report to Jenkins Home') {
+              steps{
+                  sh 'echo "ciao"'
+              }
+          }
 
 
 
