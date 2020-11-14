@@ -153,9 +153,9 @@ pipeline {
                 }
             }
         } 
-        post{
-            sh 'echo "ciao"'
-        }
+        // post{
+        //     sh 'echo "ciao"'
+        // }
 
 
          stage ('Generating Software Bill of Materials') {
