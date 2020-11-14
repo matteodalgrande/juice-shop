@@ -6,7 +6,7 @@ pipeline {
     stages {
 
         // //ok
-        stage('LINTING - STANDARD - GIT SECRET'){
+        stage('LINTING - STANDARD'){
             parallel{
                 //ok   
                     stage('standard-code and angular-linting'){
@@ -27,11 +27,6 @@ pipeline {
                                         sh 'echo "ciao"'
                     }
                 }
-                stage('git-secrets'){
-                    steps{
-                    sh 'echo "ciao"'
-                    }
-                }
             }
         }
 
@@ -48,26 +43,26 @@ pipeline {
         stage('SAST'){
             parallel {
                 //ok
-                stage ('SonarQube Analysis') {
+                stage ('SonarQube') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
                 //ok
-                stage ('NPM Audit Analysis') {
+                stage ('NPM Audit') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
                 // //ok    AGGIUNGEREI LA PARTE GUI, ma con un docker esterno alla pipeline
-                stage ('NodeJsScan Analysis') {
+                stage ('NodeJsScan') {
                     steps {
                                         sh 'echo "ciao"'
                     }
                 }
 
                 // //ok    prettyPrint json
-                stage ('Retire.js Analysis') {
+                stage ('Retire.js') {
                     steps {
                                         sh 'echo "ciao"'
                     }
@@ -75,14 +70,14 @@ pipeline {
 
                 
                 // //ok
-                stage ('Dependency-Check Analysis') {
+                stage ('Dependency-Check') {
                     steps{
                                         sh 'echo "ciao"'
                     }
                 }
 
                 // //ok
-                stage ('Audit.js Analysis') {
+                stage ('Audit.js') {
 
                     steps {
                                         sh 'echo "ciao"'
@@ -91,7 +86,7 @@ pipeline {
                     }
 
                 // //ok
-                stage ('Snyk Analysis') {
+                stage ('Snyk') {
 
                     steps {
                                         sh 'echo "ciao"'
@@ -128,6 +123,12 @@ pipeline {
                             }
                         }
                         stage ('e2e test') {
+                             steps {
+                                                 sh 'echo "ciao"'
+  
+                            }
+                        }
+                        stage ('Integration Test') {
                              steps {
                                                  sh 'echo "ciao"'
   
